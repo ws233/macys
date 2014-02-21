@@ -47,9 +47,22 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (![fileManager fileExistsAtPath:dbPath]) {
-        
+        // first start
         self.products = [self productsFromJSON];
+        
+        [self createDataBaseAtPath:dbPath];
+        
+        [self.database executeUpdate:@"create table products (id integer PRIMARY KEY, name text, description text, regularPrice double, salePrice double)"]; //, productPhoto, colors, stores )"];
+        
+    } else {
+        
+        [self createDataBaseAtPath:dbPath];
     }
+    
+    return 0;
+}
+
+- (NSInteger)createDataBaseAtPath:(NSString*)dbPath {
     
     //[fileManager removeItemAtPath:dbPath error:nil];
     
@@ -63,8 +76,6 @@
         return self.database.lastErrorCode;
     }
     
-    [self.database executeUpdate:@"create table products (id integer, name text, description text, regularPrice double, salePrice double)"]; //, productPhoto, colors, stores )"];
-    
     return 0;
 }
 
@@ -73,14 +84,15 @@
     [self.database beginTransaction];
     
     [self.database executeUpdate:@"insert into products (id, name, description, regularPrice, salePrice) values (?, ?, ?, ?, ?)" ,
-     product.id,
+     product.productId,
      product.name,
-     product.description,
+     product.explonation,
      product.regularPrice,
      product.salePrice];
     
     [self.database commit];
     
+    product.productId = self.productIdLastInserted;
     [self.mutableArrayOfProducts addObject:product];
     
     [self saveToJSONFile];
@@ -90,11 +102,37 @@
     
     [self.database beginTransaction];
     
-    BOOL res = [self.database executeUpdate:@"delete from products where id = ?", product.id];
+    [self.database executeUpdate:@"delete from products where id = ?", product.productId];
     
     [self.database commit];
     
     [self.mutableArrayOfProducts removeObject:product];
+}
+
+- (NSSet*)productsWithId:(NSNumber*)productId {
+    
+    NSMutableSet *set = [NSMutableSet set];
+    NSString *query = [NSString stringWithFormat:@"SELECT id FROM products WHERE id = %@", productId];
+    FMResultSet *resultSet = [self.database executeQuery:query];
+    
+    while ([resultSet next]) {
+        Product *product = [[Product alloc] initWithDictionary:resultSet.resultDictionary];
+        [set addObject:product];
+        //NSLog(@"%@", product);
+    }
+    
+    return set;
+}
+
+- (NSNumber*)productIdLastInserted {
+    
+    NSString *query = [NSString stringWithFormat:@"SELECT last_insert_rowid() FROM products"];
+    FMResultSet *resultSet = [self.database executeQuery:query];
+    
+    [resultSet next];
+    NSDictionary *dictionary = resultSet.resultDictionary;
+
+    return dictionary[@"last_insert_rowid()"];
 }
 
 #pragma mark - JSON related functions
@@ -117,7 +155,6 @@
     } else {
         NSLog(@"Not valid JSON object!");
     }
-    
 }
 
 - (NSMutableArray*)productsFromJSON {

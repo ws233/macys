@@ -129,9 +129,6 @@
 - (void)insertNewObjectTapped:(id)sender
 {
     Product *emptyProdyct = [[Product alloc] init];
-    emptyProdyct.name = @"New Product";
-    emptyProdyct.description = @"Input Description here...";
-    
     [[DataStore sharedInstance] addProduct:emptyProdyct];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

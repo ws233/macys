@@ -18,7 +18,11 @@
 
 - (id)init {
     
-    self = [self initWithDictionary:nil];
+    NSDictionary *dictionary = @{
+                                 @"name"        : @"New Product",
+                                 @"description" : @"Input Description here...",
+                                 };
+    self = [self initWithDictionary:dictionary];
     if (self) {
         
     }
@@ -29,9 +33,9 @@
     
     self = [super init];
     if (self) {
-        self.id = dictionary[NSStringFromSelector(@selector(id))];
+        self.productId = dictionary[@"id"];
         self.name = dictionary[NSStringFromSelector(@selector(name))];
-        self.description = dictionary[NSStringFromSelector(@selector(description))];
+        self.explonation = dictionary[@"description"];
         self.regularPrice = dictionary[NSStringFromSelector(@selector(regularPrice))];
         self.salePrice = dictionary[NSStringFromSelector(@selector(salePrice))];
         self.productPhoto = dictionary[NSStringFromSelector(@selector(productPhoto))];
