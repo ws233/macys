@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ColorsViewController.h"
+
 @class Product;
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <UIScrollViewDelegate, ColorsViewControllerDelegate>
 
 @property (strong, nonatomic) Product *detailItem;
 

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8448CA9618B881E10006F3A6 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CA9518B881E10006F3A6 /* Entity.m */; };
+		8448CA9918B883CC0006F3A6 /* Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CA9818B883CC0006F3A6 /* Color.m */; };
+		8448CAA118B887A40006F3A6 /* ColorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CAA018B887A40006F3A6 /* ColorsViewController.m */; };
+		8448CAA418B888D60006F3A6 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CAA318B888D60006F3A6 /* UIColor+Hex.m */; };
+		84F0F9CC18B89FC00086FD63 /* macys_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F0F9CB18B89FC00086FD63 /* macys_logo.png */; };
+		84F0F9D118B8D6790086FD63 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0F9D018B8D6790086FD63 /* Base64.m */; };
 		F261843518B71F3800D10042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843418B71F3800D10042 /* Foundation.framework */; };
 		F261843718B71F3800D10042 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843618B71F3800D10042 /* CoreGraphics.framework */; };
 		F261843918B71F3800D10042 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843818B71F3800D10042 /* UIKit.framework */; };
@@ -44,6 +50,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8448CA9418B881E10006F3A6 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		8448CA9518B881E10006F3A6 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		8448CA9718B883CC0006F3A6 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		8448CA9818B883CC0006F3A6 /* Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Color.m; sourceTree = "<group>"; };
+		8448CA9F18B887A40006F3A6 /* ColorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorsViewController.h; sourceTree = "<group>"; };
+		8448CAA018B887A40006F3A6 /* ColorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorsViewController.m; sourceTree = "<group>"; };
+		8448CAA218B888D60006F3A6 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "macys/UIColor+Hex.h"; sourceTree = SOURCE_ROOT; };
+		8448CAA318B888D60006F3A6 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "macys/UIColor+Hex.m"; sourceTree = SOURCE_ROOT; };
+		84F0F9CB18B89FC00086FD63 /* macys_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macys_logo.png; sourceTree = "<group>"; };
+		84F0F9CF18B8D6790086FD63 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		84F0F9D018B8D6790086FD63 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		F261843118B71F3800D10042 /* macys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F261843418B71F3800D10042 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F261843618B71F3800D10042 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -108,6 +125,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8448CAA518B894110006F3A6 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				84F0F9CB18B89FC00086FD63 /* macys_logo.png */,
+			);
+			path = icons;
+			sourceTree = "<group>";
+		};
+		84F0F9CE18B8D6790086FD63 /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				84F0F9CF18B8D6790086FD63 /* Base64.h */,
+				84F0F9D018B8D6790086FD63 /* Base64.m */,
+			);
+			path = Base64;
+			sourceTree = "<group>";
+		};
 		F261842818B71F3800D10042 = {
 			isa = PBXGroup;
 			children = (
@@ -143,20 +177,30 @@
 			isa = PBXGroup;
 			children = (
 				F261847418B72B5000D10042 /* FMDB */,
+				84F0F9CE18B8D6790086FD63 /* Base64 */,
+				8448CAA518B894110006F3A6 /* icons */,
 				F261844318B71F3800D10042 /* AppDelegate.h */,
 				F261844418B71F3800D10042 /* AppDelegate.m */,
+				8448CAA218B888D60006F3A6 /* UIColor+Hex.h */,
+				8448CAA318B888D60006F3A6 /* UIColor+Hex.m */,
 				F261844618B71F3800D10042 /* Main.storyboard */,
 				F261844918B71F3800D10042 /* MasterViewController.h */,
 				F261844A18B71F3800D10042 /* MasterViewController.m */,
 				F261844C18B71F3800D10042 /* DetailViewController.h */,
 				F261844D18B71F3800D10042 /* DetailViewController.m */,
 				F261846C18B71FBC00D10042 /* DetailViewController.xib */,
+				8448CA9F18B887A40006F3A6 /* ColorsViewController.h */,
+				8448CAA018B887A40006F3A6 /* ColorsViewController.m */,
 				F261844F18B71F3800D10042 /* Images.xcassets */,
 				F261843B18B71F3800D10042 /* Supporting Files */,
 				F261846E18B7204A00D10042 /* DataStore.h */,
 				F261846F18B7204A00D10042 /* DataStore.m */,
+				8448CA9418B881E10006F3A6 /* Entity.h */,
+				8448CA9518B881E10006F3A6 /* Entity.m */,
 				F261847118B720A800D10042 /* Product.h */,
 				F261847218B720A800D10042 /* Product.m */,
+				8448CA9718B883CC0006F3A6 /* Color.h */,
+				8448CA9818B883CC0006F3A6 /* Color.m */,
 			);
 			path = macys;
 			sourceTree = "<group>";
@@ -285,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F261845018B71F3800D10042 /* Images.xcassets in Resources */,
+				84F0F9CC18B89FC00086FD63 /* macys_logo.png in Resources */,
 				F261843F18B71F3800D10042 /* InfoPlist.strings in Resources */,
 				F261844818B71F3800D10042 /* Main.storyboard in Resources */,
 				F261846D18B71FBC00D10042 /* DetailViewController.xib in Resources */,
@@ -306,10 +351,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8448CA9618B881E10006F3A6 /* Entity.m in Sources */,
+				8448CAA418B888D60006F3A6 /* UIColor+Hex.m in Sources */,
 				F261847018B7204A00D10042 /* DataStore.m in Sources */,
 				F261844518B71F3800D10042 /* AppDelegate.m in Sources */,
 				F261844B18B71F3800D10042 /* MasterViewController.m in Sources */,
 				F261848018B72B5000D10042 /* FMDatabase.m in Sources */,
+				8448CA9918B883CC0006F3A6 /* Color.m in Sources */,
+				8448CAA118B887A40006F3A6 /* ColorsViewController.m in Sources */,
+				84F0F9D118B8D6790086FD63 /* Base64.m in Sources */,
 				F261848218B72B5000D10042 /* FMDatabasePool.m in Sources */,
 				F261848318B72B5000D10042 /* FMDatabaseQueue.m in Sources */,
 				F261848518B72B5000D10042 /* FMResultSet.m in Sources */,
@@ -527,6 +577,7 @@
 				F261846818B71F3900D10042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F261846918B71F3900D10042 /* Build configuration list for PBXNativeTarget "macysTests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +586,7 @@
 				F261846B18B71F3900D10042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

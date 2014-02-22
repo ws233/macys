@@ -48,6 +48,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -66,7 +73,7 @@
 
     Product *product = self.products[indexPath.row];
     cell.textLabel.text = product.name;
-    cell.detailTextLabel.text = product.description;
+    cell.detailTextLabel.text = product.explonation;
     cell.imageView.image = product.productPhoto;
     
     return cell;

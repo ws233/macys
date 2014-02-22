@@ -8,25 +8,34 @@
 
 #import "DetailViewController.h"
 
+#import "DataStore.h"
+#import "Product.h"
+
 @interface DetailViewController ()
-@property (nonatomic, strong) IBOutlet UILabel *textFieldName;
-@property (nonatomic, strong) IBOutlet UILabel *textViewDescription;
-@property (nonatomic, strong) IBOutlet UITextField *textFieldRegularPrice;
-@property (nonatomic, strong) IBOutlet UITextField *textFieldSalePrice;
-@property (nonatomic, strong) IBOutlet UIImageView *imageViewProductPhoto;
-//@property (nonatomic, strong) IBOutlet NSArray *colors;
-//@property (nonatomic, strong) IBOutlet NSDictionary *stores;
-@property (nonatomic, strong) IBOutlet UILabel *labelName;
-@property (nonatomic, strong) IBOutlet UILabel *labelDescription;
-@property (nonatomic, strong) IBOutlet UILabel *labelRegularPrice;
-@property (nonatomic, strong) IBOutlet UILabel *labelSalePrice;
-//@property (nonatomic, strong) IBOutlet NSArray *colors;
-//@property (nonatomic, strong) IBOutlet NSDictionary *stores;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UIView *contentView;
+@property (nonatomic, weak) IBOutlet UITextField *textFieldName;
+@property (nonatomic, weak) IBOutlet UITextView *textViewDescription;
+@property (nonatomic, weak) IBOutlet UITextField *textFieldRegularPrice;
+@property (nonatomic, weak) IBOutlet UITextField *textFieldSalePrice;
+@property (nonatomic, weak) IBOutlet UIImageView *imageViewProductPhoto;
+@property (nonatomic, weak) IBOutlet UIButton *buttonColors;
+@property (nonatomic, weak) IBOutlet UIButton *buttonStores;
+@property (nonatomic, weak) IBOutlet UILabel *labelName;
+@property (nonatomic, weak) IBOutlet UILabel *labelDescription;
+@property (nonatomic, weak) IBOutlet UILabel *labelRegularPrice;
+@property (nonatomic, weak) IBOutlet UILabel *labelSalePrice;
+@property (nonatomic, weak) IBOutlet UIButton *buttonImage;
 @end
 
 @implementation DetailViewController
 
 #pragma mark - Managing the detail item
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
@@ -34,6 +43,9 @@
     if (self) {
         self.navigationItem.title = @"Product";
         self.navigationItem.rightBarButtonItem = self.editButtonItem;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
@@ -51,8 +63,12 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
-    if (self.detailItem) {
+    if (self.detailItem && self.isViewLoaded) {
+        self.imageViewProductPhoto.image = self.detailItem.productPhoto;
+        self.labelName.text = self.textFieldName.text = self.detailItem.name;
+        self.labelDescription.text = self.textViewDescription.text = self.detailItem.explonation;
+        self.labelRegularPrice.text = self.textFieldRegularPrice.text = [NSNumberFormatter localizedStringFromNumber:self.detailItem.regularPrice numberStyle:NSNumberFormatterCurrencyStyle];
+        self.labelSalePrice.text = self.textFieldSalePrice.text = [NSNumberFormatter localizedStringFromNumber:self.detailItem.salePrice numberStyle:NSNumberFormatterCurrencyStyle];
     }
 }
 
@@ -61,6 +77,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    
+    self.scrollView.contentSize = self.contentView.frame.size;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,11 +87,121 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    
+    if (editing) {
+        self.textFieldName.hidden =
+        self.textFieldRegularPrice.hidden =
+        self.textFieldSalePrice.hidden =
+        self.textViewDescription.hidden = NO;
+    } else {
+        self.textFieldName.hidden =
+        self.textFieldRegularPrice.hidden =
+        self.textFieldSalePrice.hidden =
+        self.textViewDescription.hidden = YES;
+        
+        [self updateItem];
+        [[DataStore sharedInstance] updateProduct:self.detailItem];
+        
+        [self resignAllFirstResponders];
+    }
+}
+
+- (void)resignAllFirstResponders
+{
+    [self.textFieldName resignFirstResponder];
+    [self.textFieldRegularPrice resignFirstResponder];
+    [self.textFieldSalePrice resignFirstResponder];
+    [self.textViewDescription resignFirstResponder];
+}
+
+- (void)updateItem
+{
+    self.detailItem.productPhoto = self.imageViewProductPhoto.image;
+    self.labelName.text = self.detailItem.name = self.textFieldName.text;
+    self.labelDescription.text = self.detailItem.explonation = self.textViewDescription.text;
+    
+    self.detailItem.regularPrice = @(self.textFieldRegularPrice.text.integerValue);
+    self.labelRegularPrice.text = self.textFieldRegularPrice.text;
+    
+    self.detailItem.salePrice = @(self.textFieldSalePrice.text.integerValue);
+    self.labelSalePrice.text = self.textFieldSalePrice.text;
+}
+
+- (void)animateViewFrameChangeForNotification:(NSNotification*)notification
+{
+    NSValue *begin = notification.userInfo[UIKeyboardFrameBeginUserInfoKey];
+    NSValue *end = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    float delta = begin.CGRectValue.origin.y - end.CGRectValue.origin.y;
+    [UIView animateWithDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
+                          delay:0
+                        options:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]
+                     animations:^{
+                         CGRect frame = self.view.frame;
+                         frame.size.height -= delta;
+                         self.view.frame = frame;
+                     } completion:nil];
+}
+
+#pragma mark - ColorsViewController delegate methods
+
+- (void)colorsViewController:(ColorsViewController *)controller didAddColor:(Color *)color {
+    
+    [[DataStore sharedInstance] addColor:color toProduct:self.detailItem];
+}
+
+- (void)colorsViewController:(ColorsViewController *)controller didRemoveColor:(Color *)color {
+    
+    [[DataStore sharedInstance] removeColor:color fromProduct:self.detailItem];
+}
+
+#pragma mark - UIScrollView delegate methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+}
+
+#pragma mark - Notification Responders
+
+- (void)keyboardWillShowNotification:(NSNotification*)notification
+{
+    [self animateViewFrameChangeForNotification:notification];
+}
+
+- (void)keyboardWillHideNotification:(NSNotification*)notification
+{
+    [self animateViewFrameChangeForNotification:notification];
+}
+
 #pragma mark - Actions
 
-- (IBAction)buttonDoneTapped:(id)sender {
+- (IBAction)buttonColorsTapped:(id)sender {
     
-    [self setEditing:YES animated:YES];
+    ColorsViewController *colorsViewController = [[ColorsViewController alloc] init];
+    colorsViewController.colors = self.detailItem.colors;
+    colorsViewController.delegate = self;
+    colorsViewController.allowsEditing = YES;
+    [self.navigationController pushViewController:colorsViewController animated:YES];
+}
+
+- (IBAction)buttonStoresTapped:(id)sender {
+}
+
+- (IBAction)buttonImageTapped:(id)sender {
+    
+    if (self.editing) {
+        
+    } else {
+        
+    }
+}
+
+- (IBAction)buttonAllViewTapped:(id)sender {
+    
+    [self resignAllFirstResponders];
 }
 
 @end

@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "Product.h"
+#import "Color.h"
 
 @interface DataStore : NSObject
 
 @property (nonatomic, strong) NSArray *products;
+@property (nonatomic, strong, readonly) NSArray *allAvailableColors;
 
 + (instancetype)sharedInstance;
 
@@ -20,5 +22,10 @@
 
 - (void)addProduct:(Product*)product;
 - (void)removeProduct:(Product*)product;
+- (void)updateProduct:(Product*)product;
+
+- (void)addColor:(Color*)color toProduct:(Product*)product;
+- (void)removeColor:(Color*)color fromProduct:(Product*)product;
+- (NSSet*)colorsForProductId:(NSUInteger)productId;
 
 @end

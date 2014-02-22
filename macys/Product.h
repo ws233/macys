@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Entity.h"
 
-@interface Product : NSObject
+@interface Product : Entity
 
 @property (nonatomic, strong) NSNumber *productId;  // the same as id, prefer not to use it, since it's a objc keyword
 @property (nonatomic, strong) NSString *name;
@@ -16,12 +16,7 @@
 @property (nonatomic, strong) NSNumber *regularPrice;
 @property (nonatomic, strong) NSNumber *salePrice;
 @property (nonatomic, strong) UIImage *productPhoto;
-@property (nonatomic, strong) NSArray *colors;
+@property (nonatomic, strong) NSMutableArray *colors;
 @property (nonatomic, strong) NSDictionary *stores;
-
-- (id)initWithDictionary:(NSDictionary*)dictionary; // designed
-
-@property (nonatomic, strong) NSMutableDictionary *jsonData;
-
 
 @end
