@@ -137,7 +137,7 @@
 {
     Product *emptyProdyct = [[Product alloc] init];
     [[DataStore sharedInstance] addProduct:emptyProdyct];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.products.count-1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     // process Action

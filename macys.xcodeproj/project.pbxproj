@@ -13,6 +13,8 @@
 		8448CAA418B888D60006F3A6 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CAA318B888D60006F3A6 /* UIColor+Hex.m */; };
 		84F0F9CC18B89FC00086FD63 /* macys_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F0F9CB18B89FC00086FD63 /* macys_logo.png */; };
 		84F0F9D118B8D6790086FD63 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0F9D018B8D6790086FD63 /* Base64.m */; };
+		84F0F9D518B8FF920086FD63 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */; };
+		84F0F9D618B8FF920086FD63 /* FullScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */; };
 		F261843518B71F3800D10042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843418B71F3800D10042 /* Foundation.framework */; };
 		F261843718B71F3800D10042 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843618B71F3800D10042 /* CoreGraphics.framework */; };
 		F261843918B71F3800D10042 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843818B71F3800D10042 /* UIKit.framework */; };
@@ -61,6 +63,9 @@
 		84F0F9CB18B89FC00086FD63 /* macys_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macys_logo.png; sourceTree = "<group>"; };
 		84F0F9CF18B8D6790086FD63 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		84F0F9D018B8D6790086FD63 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		84F0F9D218B8FF920086FD63 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
+		84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
+		84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullScreenViewController.xib; sourceTree = "<group>"; };
 		F261843118B71F3800D10042 /* macys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F261843418B71F3800D10042 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F261843618B71F3800D10042 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -191,6 +196,9 @@
 				F261846C18B71FBC00D10042 /* DetailViewController.xib */,
 				8448CA9F18B887A40006F3A6 /* ColorsViewController.h */,
 				8448CAA018B887A40006F3A6 /* ColorsViewController.m */,
+				84F0F9D218B8FF920086FD63 /* FullScreenViewController.h */,
+				84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */,
+				84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */,
 				F261844F18B71F3800D10042 /* Images.xcassets */,
 				F261843B18B71F3800D10042 /* Supporting Files */,
 				F261846E18B7204A00D10042 /* DataStore.h */,
@@ -333,6 +341,7 @@
 				F261843F18B71F3800D10042 /* InfoPlist.strings in Resources */,
 				F261844818B71F3800D10042 /* Main.storyboard in Resources */,
 				F261846D18B71FBC00D10042 /* DetailViewController.xib in Resources */,
+				84F0F9D618B8FF920086FD63 /* FullScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F0F9D518B8FF920086FD63 /* FullScreenViewController.m in Sources */,
 				8448CA9618B881E10006F3A6 /* Entity.m in Sources */,
 				8448CAA418B888D60006F3A6 /* UIColor+Hex.m in Sources */,
 				F261847018B7204A00D10042 /* DataStore.m in Sources */,

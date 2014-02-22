@@ -66,7 +66,7 @@
         [self.database executeUpdate:@"insert into colors (name, rgb) values (?, ?)", @"yellow", @([UIColor yellowColor].colorCode)];
         [self.database executeUpdate:@"insert into colors (name, rgb) values (?, ?)", @"orange", @([UIColor orangeColor].colorCode)];
         [self.database executeUpdate:@"insert into colors (name, rgb) values (?, ?)", @"black", @([UIColor blackColor].colorCode)];
-        [self.database executeUpdate:@"insert into colors (name, rgb) values (?, ?)", @"gray", @([UIColor grayColor].colorCode)];
+        [self.database executeUpdate:@"insert into colors (name, rgb) values (?, ?)", @"gray", @([UIColor lightGrayColor].colorCode)];
         
     } else {
         

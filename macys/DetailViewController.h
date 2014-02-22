@@ -12,7 +12,13 @@
 
 @class Product;
 
-@interface DetailViewController : UIViewController <UIScrollViewDelegate, ColorsViewControllerDelegate>
+@interface DetailViewController : UIViewController <
+    UIScrollViewDelegate,
+    UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate,
+    UIActionSheetDelegate,
+    ColorsViewControllerDelegate
+>
 
 @property (strong, nonatomic) Product *detailItem;
 

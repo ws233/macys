@@ -37,7 +37,7 @@
         self.explonation = dictionary[@"description"];
         self.regularPrice = dictionary[NSStringFromSelector(@selector(regularPrice))];
         self.salePrice = dictionary[NSStringFromSelector(@selector(salePrice))];
-        self.productPhoto = [UIImage imageWithData:imageData];
+        _productPhoto = [UIImage imageWithData:imageData];
         self.colors = [[DataStore sharedInstance] colorsForProductId:self.productId.integerValue].allObjects.mutableCopy;
         //self.stores = dictionary[NSStringFromSelector(@selector(stores))];
     }
@@ -47,6 +47,15 @@
 - (Class)classForArrayObjectNamed:(NSString*)objectNamed {
     
     return [Color class];
+}
+
+#pragma mark - Getters and setters
+
+- (void)setProductPhoto:(UIImage *)productPhoto {
+    
+    _productPhoto = productPhoto;
+    
+    [[DataStore sharedInstance] updateProduct:self];
 }
 
 @end

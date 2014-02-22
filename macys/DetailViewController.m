@@ -7,6 +7,8 @@
 //
 
 #import "DetailViewController.h"
+#import <MobileCoreServices/UTCoreTypes.h>
+#import "FullScreenViewController.h"
 
 #import "DataStore.h"
 #import "Product.h"
@@ -79,6 +81,13 @@
     [self configureView];
     
     self.scrollView.contentSize = self.contentView.frame.size;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self resignAllFirstResponders];
 }
 
 - (void)didReceiveMemoryWarning
@@ -176,6 +185,58 @@
     [self animateViewFrameChangeForNotification:notification];
 }
 
+#pragma mark - UIImagePickerController delegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    if (image) {
+        self.imageViewProductPhoto.image =
+        self.detailItem.productPhoto = image;
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIActionSheet delegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == actionSheet.cancelButtonIndex) return;
+    
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        self.imageViewProductPhoto.image =
+        self.detailItem.productPhoto = nil;
+    }
+    
+    switch (buttonIndex) {
+        case 1: {
+            UIImagePickerController *galleryController = [[UIImagePickerController alloc] init];
+            galleryController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            galleryController.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            galleryController.delegate = self;
+            [self presentViewController:galleryController animated:YES completion:nil];
+            break;
+        }
+            
+        case 2: {
+            UIImagePickerController *cameraController = [[UIImagePickerController alloc] init];
+            cameraController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            cameraController.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+            cameraController.delegate = self;
+            [self presentViewController:cameraController animated:YES completion:nil];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - Actions
 
 - (IBAction)buttonColorsTapped:(id)sender {
@@ -194,8 +255,13 @@
     
     if (self.editing) {
         
-    } else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:@"Load from Library", @"Take from Camera", nil];
+        [actionSheet showInView:self.view];
         
+    } else {
+        FullScreenViewController *fullScreenViewController = [[FullScreenViewController alloc] init];
+        fullScreenViewController.image = self.detailItem.productPhoto;
+        [self.navigationController pushViewController:fullScreenViewController animated:YES];
     }
 }
 
