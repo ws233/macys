@@ -269,6 +269,8 @@
     
     if (self.editing) {
         
+        [self resignAllFirstResponders];
+        
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:@"Load from Library", @"Take from Camera", nil];
         [actionSheet showInView:self.view];
         
