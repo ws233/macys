@@ -140,6 +140,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8400F26B18BA392300DFFBFC /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				F261846E18B7204A00D10042 /* DataStore.h */,
+				F261846F18B7204A00D10042 /* DataStore.m */,
+				8448CA9418B881E10006F3A6 /* Entity.h */,
+				8448CA9518B881E10006F3A6 /* Entity.m */,
+				F261847118B720A800D10042 /* Product.h */,
+				F261847218B720A800D10042 /* Product.m */,
+				8448CA9718B883CC0006F3A6 /* Color.h */,
+				8448CA9818B883CC0006F3A6 /* Color.m */,
+				840813FF18B9C30600F4DAF7 /* Store.h */,
+				8408140018B9C30600F4DAF7 /* Store.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
+		8400F26C18BA395E00DFFBFC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F261844918B71F3800D10042 /* MasterViewController.h */,
+				F261844A18B71F3800D10042 /* MasterViewController.m */,
+				F261844C18B71F3800D10042 /* DetailViewController.h */,
+				F261844D18B71F3800D10042 /* DetailViewController.m */,
+				F261846C18B71FBC00D10042 /* DetailViewController.xib */,
+				8448CA9F18B887A40006F3A6 /* ColorsViewController.h */,
+				8448CAA018B887A40006F3A6 /* ColorsViewController.m */,
+				8408140218B9C43100F4DAF7 /* StoresViewController.h */,
+				8408140318B9C43100F4DAF7 /* StoresViewController.m */,
+				8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */,
+				84F0F9D218B8FF920086FD63 /* FullScreenViewController.h */,
+				84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */,
+				84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8400F26D18BA397D00DFFBFC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8448CAA218B888D60006F3A6 /* UIColor+Hex.h */,
+				8448CAA318B888D60006F3A6 /* UIColor+Hex.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		8448CAA518B894110006F3A6 /* icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,40 +237,18 @@
 		F261843A18B71F3800D10042 /* macys */ = {
 			isa = PBXGroup;
 			children = (
+				8400F26D18BA397D00DFFBFC /* Categories */,
 				F261847418B72B5000D10042 /* FMDB */,
 				84F0F9CE18B8D6790086FD63 /* Base64 */,
 				8448CAA518B894110006F3A6 /* icons */,
 				F261844318B71F3800D10042 /* AppDelegate.h */,
 				F261844418B71F3800D10042 /* AppDelegate.m */,
-				8448CAA218B888D60006F3A6 /* UIColor+Hex.h */,
-				8448CAA318B888D60006F3A6 /* UIColor+Hex.m */,
+				8400F26B18BA392300DFFBFC /* DataModel */,
+				8400F26C18BA395E00DFFBFC /* Controllers */,
 				F261844618B71F3800D10042 /* Main.storyboard */,
 				8408140718B9D0DA00F4DAF7 /* first.json */,
-				F261844918B71F3800D10042 /* MasterViewController.h */,
-				F261844A18B71F3800D10042 /* MasterViewController.m */,
-				F261844C18B71F3800D10042 /* DetailViewController.h */,
-				F261844D18B71F3800D10042 /* DetailViewController.m */,
-				F261846C18B71FBC00D10042 /* DetailViewController.xib */,
-				8448CA9F18B887A40006F3A6 /* ColorsViewController.h */,
-				8448CAA018B887A40006F3A6 /* ColorsViewController.m */,
-				8408140218B9C43100F4DAF7 /* StoresViewController.h */,
-				8408140318B9C43100F4DAF7 /* StoresViewController.m */,
-				8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */,
-				84F0F9D218B8FF920086FD63 /* FullScreenViewController.h */,
-				84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */,
-				84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */,
 				F261844F18B71F3800D10042 /* Images.xcassets */,
 				F261843B18B71F3800D10042 /* Supporting Files */,
-				F261846E18B7204A00D10042 /* DataStore.h */,
-				F261846F18B7204A00D10042 /* DataStore.m */,
-				8448CA9418B881E10006F3A6 /* Entity.h */,
-				8448CA9518B881E10006F3A6 /* Entity.m */,
-				F261847118B720A800D10042 /* Product.h */,
-				F261847218B720A800D10042 /* Product.m */,
-				8448CA9718B883CC0006F3A6 /* Color.h */,
-				8448CA9818B883CC0006F3A6 /* Color.m */,
-				840813FF18B9C30600F4DAF7 /* Store.h */,
-				8408140018B9C30600F4DAF7 /* Store.m */,
 			);
 			path = macys;
 			sourceTree = "<group>";
