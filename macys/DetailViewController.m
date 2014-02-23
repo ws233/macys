@@ -9,9 +9,12 @@
 #import "DetailViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "FullScreenViewController.h"
+#import "StoresViewController.h"
 
 #import "DataStore.h"
 #import "Product.h"
+#import "Color.h"
+#import "Store.h"
 
 @interface DetailViewController ()
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
@@ -69,8 +72,8 @@
         self.imageViewProductPhoto.image = self.detailItem.productPhoto;
         self.labelName.text = self.textFieldName.text = self.detailItem.name;
         self.labelDescription.text = self.textViewDescription.text = self.detailItem.explonation;
-        self.labelRegularPrice.text = self.textFieldRegularPrice.text = [NSNumberFormatter localizedStringFromNumber:self.detailItem.regularPrice numberStyle:NSNumberFormatterCurrencyStyle];
-        self.labelSalePrice.text = self.textFieldSalePrice.text = [NSNumberFormatter localizedStringFromNumber:self.detailItem.salePrice numberStyle:NSNumberFormatterCurrencyStyle];
+        self.labelRegularPrice.text = self.textFieldRegularPrice.text = [NSNumberFormatter localizedStringFromNumber:self.detailItem.regularPrice numberStyle:NSNumberFormatterDecimalStyle];
+        self.labelSalePrice.text = self.textFieldSalePrice.text = [NSNumberFormatter localizedStringFromNumber:self.detailItem.salePrice numberStyle:NSNumberFormatterDecimalStyle];
     }
 }
 
@@ -132,10 +135,10 @@
     self.labelName.text = self.detailItem.name = self.textFieldName.text;
     self.labelDescription.text = self.detailItem.explonation = self.textViewDescription.text;
     
-    self.detailItem.regularPrice = @(self.textFieldRegularPrice.text.integerValue);
+    self.detailItem.regularPrice = @(self.textFieldRegularPrice.text.floatValue);
     self.labelRegularPrice.text = self.textFieldRegularPrice.text;
     
-    self.detailItem.salePrice = @(self.textFieldSalePrice.text.integerValue);
+    self.detailItem.salePrice = @(self.textFieldSalePrice.text.floatValue);
     self.labelSalePrice.text = self.textFieldSalePrice.text;
 }
 
@@ -154,23 +157,28 @@
                      } completion:nil];
 }
 
-#pragma mark - ColorsViewController delegate methods
+#pragma mark - ObjectViewController delegate methods
 
-- (void)colorsViewController:(ColorsViewController *)controller didAddColor:(Color *)color {
+- (void)objectsViewController:(ColorsViewController *)controller didAddObject:(Entity *)entity {
     
-    [[DataStore sharedInstance] addColor:color toProduct:self.detailItem];
+    if ([controller isMemberOfClass:[ColorsViewController class]]) {
+        assert([entity isMemberOfClass:[Color class]]);
+        [[DataStore sharedInstance] addColor:(Color*)entity toProduct:self.detailItem];
+    } else if ([controller isMemberOfClass:[StoresViewController class]]) {
+        assert([entity isMemberOfClass:[Store class]]);
+        [[DataStore sharedInstance] addStore:(Store*)entity toProduct:self.detailItem];
+    }
 }
 
-- (void)colorsViewController:(ColorsViewController *)controller didRemoveColor:(Color *)color {
+- (void)objectsViewController:(ColorsViewController *)controller didRemoveObject:(Entity *)entity {
     
-    [[DataStore sharedInstance] removeColor:color fromProduct:self.detailItem];
-}
-
-#pragma mark - UIScrollView delegate methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    
+    if ([controller isMemberOfClass:[ColorsViewController class]]) {
+        assert([entity isMemberOfClass:[Color class]]);
+        [[DataStore sharedInstance] removeColor:(Color*)entity fromProduct:self.detailItem];
+    } else if ([controller isMemberOfClass:[StoresViewController class]]) {
+        assert([entity isMemberOfClass:[Store class]]);
+        [[DataStore sharedInstance] removeStore:(Store*)entity fromProduct:self.detailItem];
+    }
 }
 
 #pragma mark - Notification Responders
@@ -242,13 +250,19 @@
 - (IBAction)buttonColorsTapped:(id)sender {
     
     ColorsViewController *colorsViewController = [[ColorsViewController alloc] init];
-    colorsViewController.colors = self.detailItem.colors;
+    colorsViewController.objects = self.detailItem.colors;
     colorsViewController.delegate = self;
     colorsViewController.allowsEditing = YES;
     [self.navigationController pushViewController:colorsViewController animated:YES];
 }
 
 - (IBAction)buttonStoresTapped:(id)sender {
+    
+    StoresViewController *storesViewController = [[StoresViewController alloc] init];
+    storesViewController.objects = self.detailItem.stores;
+    storesViewController.delegate = self;
+    storesViewController.allowsEditing = YES;
+    [self.navigationController pushViewController:storesViewController animated:YES];
 }
 
 - (IBAction)buttonImageTapped:(id)sender {

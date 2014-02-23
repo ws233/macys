@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8408140118B9C30600F4DAF7 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 8408140018B9C30600F4DAF7 /* Store.m */; };
+		8408140418B9C43100F4DAF7 /* StoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8408140318B9C43100F4DAF7 /* StoresViewController.m */; };
+		8408140618B9CCFD00F4DAF7 /* StoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */; };
+		8408140818B9D0DA00F4DAF7 /* first.json in Resources */ = {isa = PBXBuildFile; fileRef = 8408140718B9D0DA00F4DAF7 /* first.json */; };
 		8448CA9618B881E10006F3A6 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CA9518B881E10006F3A6 /* Entity.m */; };
 		8448CA9918B883CC0006F3A6 /* Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CA9818B883CC0006F3A6 /* Color.m */; };
 		8448CAA118B887A40006F3A6 /* ColorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CAA018B887A40006F3A6 /* ColorsViewController.m */; };
@@ -52,6 +56,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		840813FF18B9C30600F4DAF7 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		8408140018B9C30600F4DAF7 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
+		8408140218B9C43100F4DAF7 /* StoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoresViewController.h; sourceTree = "<group>"; };
+		8408140318B9C43100F4DAF7 /* StoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoresViewController.m; sourceTree = "<group>"; };
+		8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreTableViewCell.xib; sourceTree = "<group>"; };
+		8408140718B9D0DA00F4DAF7 /* first.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = first.json; sourceTree = "<group>"; };
 		8448CA9418B881E10006F3A6 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		8448CA9518B881E10006F3A6 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		8448CA9718B883CC0006F3A6 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
@@ -189,6 +199,7 @@
 				8448CAA218B888D60006F3A6 /* UIColor+Hex.h */,
 				8448CAA318B888D60006F3A6 /* UIColor+Hex.m */,
 				F261844618B71F3800D10042 /* Main.storyboard */,
+				8408140718B9D0DA00F4DAF7 /* first.json */,
 				F261844918B71F3800D10042 /* MasterViewController.h */,
 				F261844A18B71F3800D10042 /* MasterViewController.m */,
 				F261844C18B71F3800D10042 /* DetailViewController.h */,
@@ -196,6 +207,9 @@
 				F261846C18B71FBC00D10042 /* DetailViewController.xib */,
 				8448CA9F18B887A40006F3A6 /* ColorsViewController.h */,
 				8448CAA018B887A40006F3A6 /* ColorsViewController.m */,
+				8408140218B9C43100F4DAF7 /* StoresViewController.h */,
+				8408140318B9C43100F4DAF7 /* StoresViewController.m */,
+				8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */,
 				84F0F9D218B8FF920086FD63 /* FullScreenViewController.h */,
 				84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */,
 				84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */,
@@ -209,6 +223,8 @@
 				F261847218B720A800D10042 /* Product.m */,
 				8448CA9718B883CC0006F3A6 /* Color.h */,
 				8448CA9818B883CC0006F3A6 /* Color.m */,
+				840813FF18B9C30600F4DAF7 /* Store.h */,
+				8408140018B9C30600F4DAF7 /* Store.m */,
 			);
 			path = macys;
 			sourceTree = "<group>";
@@ -338,6 +354,8 @@
 			files = (
 				F261845018B71F3800D10042 /* Images.xcassets in Resources */,
 				84F0F9CC18B89FC00086FD63 /* macys_logo.png in Resources */,
+				8408140818B9D0DA00F4DAF7 /* first.json in Resources */,
+				8408140618B9CCFD00F4DAF7 /* StoreTableViewCell.xib in Resources */,
 				F261843F18B71F3800D10042 /* InfoPlist.strings in Resources */,
 				F261844818B71F3800D10042 /* Main.storyboard in Resources */,
 				F261846D18B71FBC00D10042 /* DetailViewController.xib in Resources */,
@@ -367,6 +385,7 @@
 				F261844518B71F3800D10042 /* AppDelegate.m in Sources */,
 				F261844B18B71F3800D10042 /* MasterViewController.m in Sources */,
 				F261848018B72B5000D10042 /* FMDatabase.m in Sources */,
+				8408140418B9C43100F4DAF7 /* StoresViewController.m in Sources */,
 				8448CA9918B883CC0006F3A6 /* Color.m in Sources */,
 				8448CAA118B887A40006F3A6 /* ColorsViewController.m in Sources */,
 				84F0F9D118B8D6790086FD63 /* Base64.m in Sources */,
@@ -375,6 +394,7 @@
 				F261848518B72B5000D10042 /* FMResultSet.m in Sources */,
 				F261847318B720A800D10042 /* Product.m in Sources */,
 				F261844118B71F3800D10042 /* main.m in Sources */,
+				8408140118B9C30600F4DAF7 /* Store.m in Sources */,
 				F261844E18B71F3800D10042 /* DetailViewController.m in Sources */,
 				F261848118B72B5000D10042 /* FMDatabaseAdditions.m in Sources */,
 			);

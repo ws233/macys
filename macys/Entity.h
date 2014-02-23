@@ -14,4 +14,6 @@
 
 - (id)initWithDictionary:(NSDictionary*)dictionary; // designed
 
+- (id)valueForKey:(NSString *)key fromDictionary:(NSDictionary*)dictionary;
+
 @end

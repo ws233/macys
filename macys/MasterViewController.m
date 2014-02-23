@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 
 #import "DataStore.h"
+#import "Product.h"
 
 @interface MasterViewController ()
 @property (nonatomic, readonly) NSArray *products;
@@ -18,11 +19,18 @@
 
 @implementation MasterViewController
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kDataStoreDidLoadDataFromJSONNotification object:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.navigationItem.title = @"All Products";
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataStoreDidLoadDataFromJSONNotification:) name:kDataStoreDidLoadDataFromJSONNotification object:nil];
     }
     return self;
 }
@@ -30,6 +38,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
+    self.navigationItem.title = @"All Products";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataStoreDidLoadDataFromJSONNotification:) name:kDataStoreDidLoadDataFromJSONNotification object:nil];
 }
 
 - (void)viewDidLoad
@@ -130,6 +142,13 @@
     }
 }
 #endif
+
+#pragma mark - Notification responders
+
+- (void)dataStoreDidLoadDataFromJSONNotification:(NSNotification*)notification {
+    
+    [self.tableView reloadData];
+}
 
 #pragma mark - Actions
 

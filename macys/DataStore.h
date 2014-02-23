@@ -7,13 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Product.h"
-#import "Color.h"
+
+@class FMDatabase;
+@class Product;
+@class Color;
+@class Store;
+
+extern NSString *const kDataStoreDidLoadDataFromJSONNotification;
 
 @interface DataStore : NSObject
 
 @property (nonatomic, strong) NSArray *products;
 @property (nonatomic, strong, readonly) NSArray *allAvailableColors;
+@property (nonatomic, strong, readonly) NSArray *allAvailableStores;
+
+@property (nonatomic, readonly) FMDatabase *database;
 
 + (instancetype)sharedInstance;
 
@@ -27,5 +35,9 @@
 - (void)addColor:(Color*)color toProduct:(Product*)product;
 - (void)removeColor:(Color*)color fromProduct:(Product*)product;
 - (NSSet*)colorsForProductId:(NSUInteger)productId;
+
+- (void)addStore:(Store*)color toProduct:(Product*)product;
+- (void)removeStore:(Store*)color fromProduct:(Product*)product;
+- (NSSet*)storesForProductId:(NSUInteger)productId;
 
 @end

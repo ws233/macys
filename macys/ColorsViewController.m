@@ -33,13 +33,18 @@ static NSString *CellIdentifier = @"ColorsCell";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    [self registerCell];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)registerCell {
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
 }
 
 #pragma mark - Table view data source
@@ -53,19 +58,23 @@ static NSString *CellIdentifier = @"ColorsCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.colors.count;
+    return self.objects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    Color *color = self.colors[indexPath.row];
-    cell.textLabel.text = color.name;
-    cell.textLabel.textColor = [UIColor colorFromRGB:color.rgb.integerValue];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseIdentifier forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
+}
+
+- (void)configureCell:(UITableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
+{
+    // Configure the cell...
+    Color *color = self.objects[indexPath.row];
+    cell.textLabel.text = color.name;
+    cell.textLabel.textColor = [UIColor colorFromRGB:color.rgb.integerValue];
 }
 
 /*
@@ -82,9 +91,9 @@ static NSString *CellIdentifier = @"ColorsCell";
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        if ([self.delegate respondsToSelector:@selector(colorsViewController:didAddColor:)]) {
-            Color *color = self.colors[indexPath.row];
-            [self.delegate colorsViewController:self didRemoveColor:color];
+        if ([self.delegate respondsToSelector:@selector(objectsViewController:didRemoveObject:)]) {
+            Entity *entity = self.objects[indexPath.row];
+            [self.delegate objectsViewController:self didRemoveObject:entity];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
     }
@@ -121,13 +130,13 @@ static NSString *CellIdentifier = @"ColorsCell";
 
  */
 
-#pragma mark - ColorsViewController delegate methods
+#pragma mark - ObjectsViewController delegate methods
 
-- (void)colorsViewController:(ColorsViewController *)controller didChooseColor:(Color *)color
+- (void)objectsViewController:(ColorsViewController *)controller didChooseObject:(Entity*)entity
 {
-    if ([self.delegate respondsToSelector:@selector(colorsViewController:didAddColor:)]) {
-        [self.delegate colorsViewController:self didAddColor:color];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.colors.count-1 inSection:0];
+    if ([self.delegate respondsToSelector:@selector(objectsViewController:didAddObject:)]) {
+        [self.delegate objectsViewController:self didAddObject:entity];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.objects.count-1 inSection:0];
         [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -162,13 +171,17 @@ static NSString *CellIdentifier = @"ColorsCell";
     return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObjectTapped:)];
 }
 
+- (NSString*)reuseIdentifier {
+    
+    return CellIdentifier;
+}
 
 #pragma mark - Actions
 
 - (void)insertNewObjectTapped:(id)sender
 {
     ColorsViewController *colorViewController = [[ColorsViewController alloc] init];
-    colorViewController.colors = [[DataStore sharedInstance].allAvailableColors mutableCopy];
+    colorViewController.objects = [[DataStore sharedInstance].allAvailableColors mutableCopy];
     colorViewController.delegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:colorViewController];
@@ -182,9 +195,9 @@ static NSString *CellIdentifier = @"ColorsCell";
 
 - (IBAction)saveButtonTapped:(id)sender
 {
-    Color *selectedColor = self.colors[self.tableView.indexPathForSelectedRow.row];
-    if ([self.delegate respondsToSelector:@selector(colorsViewController:didChooseColor:)]) {
-        [self.delegate colorsViewController:self didChooseColor:selectedColor];
+    Entity *selectedEntity = self.objects[self.tableView.indexPathForSelectedRow.row];
+    if ([self.delegate respondsToSelector:@selector(objectsViewController:didChooseObject:)]) {
+        [self.delegate objectsViewController:self didChooseObject:selectedEntity];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];

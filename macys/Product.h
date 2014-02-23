@@ -17,6 +17,6 @@
 @property (nonatomic, strong) NSNumber *salePrice;
 @property (nonatomic, strong) UIImage *productPhoto;
 @property (nonatomic, strong) NSMutableArray *colors;
-@property (nonatomic, strong) NSDictionary *stores;
+@property (nonatomic, strong) NSMutableArray *stores;
 
 @end

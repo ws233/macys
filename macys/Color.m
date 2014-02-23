@@ -14,9 +14,13 @@
     
     self = [super initWithDictionary:dictionary];
     if (self) {
-        self.colorId = dictionary[@"id"];
-        self.name = dictionary[NSStringFromSelector(@selector(name))];
-        self.rgb = dictionary[NSStringFromSelector(@selector(rgb))];
+        id colorId = [self valueForKey:@"id" fromDictionary:dictionary];    // from database
+        if (!colorId) {
+            [self valueForKey:NSStringFromSelector(@selector(colorId)) fromDictionary:dictionary];  // from json
+        }
+        self.colorId = colorId;
+        self.name = [self valueForKey:NSStringFromSelector(@selector(name)) fromDictionary:dictionary];
+        self.rgb = [self valueForKey:NSStringFromSelector(@selector(rgb)) fromDictionary:dictionary];
     }
     return self;
 }

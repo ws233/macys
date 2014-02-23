@@ -32,9 +32,18 @@
     
     self = [super init];
     if (self) {
-        
+
     }
     return self;
+}
+
+- (id)valueForKey:(NSString *)key fromDictionary:(NSDictionary*)dictionary {
+    
+    id value = dictionary[key];
+    if ([value isKindOfClass:[NSNull class]])
+        return nil;
+    else
+        return value;
 }
 
 - (NSMutableDictionary *)jsonData {

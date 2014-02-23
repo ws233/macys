@@ -8,25 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@class Color;
+@class Entity;
 @class ColorsViewController;
 
-@protocol ColorsViewControllerDelegate <NSObject>
+@protocol ObjectsViewControllerDelegate <NSObject>
 
 @optional
-- (void)colorsViewController:(ColorsViewController*)controller didChooseColor:(Color*)color;
-- (void)colorsViewController:(ColorsViewController*)controller didAddColor:(Color*)color;
-- (void)colorsViewController:(ColorsViewController*)controller didRemoveColor:(Color*)color;
+- (void)objectsViewController:(ColorsViewController*)controller didChooseObject:(Entity*)object;
+- (void)objectsViewController:(ColorsViewController*)controller didAddObject:(Entity*)object;
+- (void)objectsViewController:(ColorsViewController*)controller didRemoveObject:(Entity*)object;
 
 @end
 
-@interface ColorsViewController : UITableViewController <ColorsViewControllerDelegate>
+@interface ColorsViewController : UITableViewController <ObjectsViewControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *colors;
+@property (nonatomic, strong) NSMutableArray *objects;
 
 @property (nonatomic) BOOL allowsEditing;
 
-@property (nonatomic, weak) id<ColorsViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<ObjectsViewControllerDelegate> delegate;
 
 @end
 

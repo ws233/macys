@@ -17,7 +17,7 @@
     UIImagePickerControllerDelegate,
     UINavigationControllerDelegate,
     UIActionSheetDelegate,
-    ColorsViewControllerDelegate
+    ObjectsViewControllerDelegate
 >
 
 @property (strong, nonatomic) Product *detailItem;

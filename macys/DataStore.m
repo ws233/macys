@@ -10,15 +10,16 @@
 
 #import "FMDatabase.h"
 #import "Color.h"
+#import "Product.h"
+#import "Store.h"
 #import "Base64.h"
 
-#define FMDBQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
+NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadDataFromJSONNotification";
 
 @interface DataStore ()
-@property (nonatomic, strong) NSMutableArray *mutableArrayOfProducts;
-@property (nonatomic, strong) FMDatabase *database;
-@property (nonatomic, strong) NSString *documentsDirectory;
-@property (nonatomic, strong, readwrite) NSArray *allAvailableColors;
+@property (nonatomic, readonly) NSMutableArray *mutableArrayOfProducts;
+@property (nonatomic, readonly) NSString *documentsDirectory;
+@property (nonatomic, readonly) NSString *databasePath;
 @end
 
 @implementation DataStore
@@ -44,17 +45,11 @@
 
 - (int)openDatabase {
     
-    NSString *dbPath = [self.documentsDirectory stringByAppendingPathComponent:@"database.sqlite"];
-    
     // delete the old db.
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if (![fileManager fileExistsAtPath:dbPath]) {
+    if (![fileManager fileExistsAtPath:self.databasePath]) {
         // first start
-        self.products = [self productsFromJSON];
-        
-        [self createDataBaseAtPath:dbPath];
-        
         [self.database executeUpdate:@"create table products (id integer PRIMARY KEY, name text, description text, regularPrice double, salePrice double, productPhoto text)"]; // colors, stores )"];
         [self.database executeUpdate:@"create table colors (id integer PRIMARY KEY, name text, rgb integer)"];
         [self.database executeUpdate:@"create table productsToColors (product integer, color integer)"];
@@ -68,32 +63,56 @@
         [self.database executeUpdate:@"insert into colors (name, rgb) values (?, ?)", @"black", @([UIColor blackColor].colorCode)];
         [self.database executeUpdate:@"insert into colors (name, rgb) values (?, ?)", @"gray", @([UIColor lightGrayColor].colorCode)];
         
-    } else {
+        [self.database executeUpdate:@"create table stores (id integer PRIMARY KEY, name text, key text)"];
+        [self.database executeUpdate:@"create table productsToStores (product integer, store integer)"];
         
-        [self createDataBaseAtPath:dbPath];
+        [self.database executeUpdate:@"insert into stores (name, key) values (?, ?)", @"Store 1", @"st1"];
+        [self.database executeUpdate:@"insert into stores (name, key) values (?, ?)", @"Small Store", @"sm"];
+        [self.database executeUpdate:@"insert into stores (name, key) values (?, ?)", @"Large Store", @"lg"];
+        [self.database executeUpdate:@"insert into stores (name, key) values (?, ?)", @"Huge Store", @"hg"];
+        [self.database executeUpdate:@"insert into stores (name, key) values (?, ?)", @"Store 2", @"st2"];
+        [self.database executeUpdate:@"insert into stores (name, key) values (?, ?)", @"Store 3", @"st3"];
+        
+        // perform selector after delay to avoid dead lock during very first initialization
+        // not a good idea, but very fast! ^^
+#if 1
+        [self performSelector:@selector(saveProductsFromJSONToDataBase) withObject:nil afterDelay:0.01];
+#else
+        [self saveProductsFromJSONToDataBase];
+#endif
     }
     
     return 0;
 }
 
-- (NSInteger)createDataBaseAtPath:(NSString*)dbPath {
+- (void)saveProductsFromJSONToDataBase {
     
-    //[fileManager removeItemAtPath:dbPath error:nil];
-    
-    self.database = [FMDatabase databaseWithPath:dbPath];
-    
-    NSLog(@"Is SQLite compiled with it's thread safe options turned on? %@!", [FMDatabase isSQLiteThreadSafe] ? @"Yes" : @"No");
-    
-    if (![self.database open]) {
-        NSLog(@"Could not open db.");
-        NSLog(@"%d: %@", self.database.lastErrorCode, self.database.lastErrorMessage);
-        return self.database.lastErrorCode;
+    [self.mutableArrayOfProducts addObjectsFromArray:[self productsFromJSON]];
+    for (Product *product in self.products) {
+        [self saveProductToDataBase:product];
+        for (Store *store in product.stores) {
+            [self saveStore:store toProduct:product];
+        }
+        for (Color *color in product.colors) {
+            [self saveColor:color toProduct:product];
+        }
     }
     
-    return 0;
+    // update IU after data processed
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDataStoreDidLoadDataFromJSONNotification object:self];
 }
 
 - (void)addProduct:(Product*)product {
+    
+    if (![self.products containsObject:product]) {
+        
+        [self saveProductToDataBase:product];
+        
+        [self.mutableArrayOfProducts addObject:product];
+    }
+}
+
+- (void)saveProductToDataBase:(Product*)product {
     
     [self.database beginTransaction];
     
@@ -108,7 +127,6 @@
     [self.database commit];
     
     product.productId = self.productIdLastInserted;
-    [self.mutableArrayOfProducts addObject:product];
 }
 
 - (void)updateProduct:(Product*)product {
@@ -126,7 +144,7 @@
     
     [self.database commit];
     
-    [self saveToJSONFile];
+    //[self saveToJSONFile];
 }
 
 - (void)removeProduct:(Product*)product {
@@ -135,6 +153,11 @@
     
     [self.database executeUpdate:@"delete from products where id = ?", product.productId];
     
+    // delete dependencies
+    [self.database executeUpdate:@"delete from productsToColors where product = ?", product.productId];
+
+    [self.database executeUpdate:@"delete from productsToStores where product = ?", product.productId];
+    
     [self.database commit];
     
     [self.mutableArrayOfProducts removeObject:product];
@@ -142,8 +165,16 @@
 
 - (void)addColor:(Color*)color toProduct:(Product*)product
 {
-    [product.colors addObject:color];
-    
+    if (![product.colors containsObject:color]) {
+        
+        [product.colors addObject:color];
+        
+        [self saveColor:color toProduct:product];
+    }
+}
+
+- (void)saveColor:(Color*)color toProduct:(Product*)product
+{
     [self.database beginTransaction];
     
     [self.database executeUpdate:@"insert into productsToColors (product, color) values (?, ?)", product.productId, color.colorId];
@@ -179,7 +210,7 @@
 - (NSSet*)colorsForProductId:(NSUInteger)productId {
     
     NSMutableSet *set = [NSMutableSet set];
-    NSString *query = [NSString stringWithFormat:@"SELECT * FROM productsToColors WHERE product = %d", productId];
+    NSString *query = [NSString stringWithFormat:@"SELECT * FROM productsToColors WHERE product = %lu", (unsigned long)productId];
     FMResultSet *resultSet = [self.database executeQuery:query];
     
     while ([resultSet next]) {
@@ -195,6 +226,57 @@
     
     return set;
 }
+
+- (void)addStore:(Store*)store toProduct:(Product*)product {
+    
+    if (![product.stores containsObject:store]) {
+        
+        [product.stores addObject:store];
+        
+        [self saveStore:store toProduct:product];
+    }
+}
+
+- (void)saveStore:(Store*)store toProduct:(Product*)product {
+    
+    [self.database beginTransaction];
+    
+    [self.database executeUpdate:@"insert into productsToStores (product, store) values (?, ?)", product.productId, store.storeId];
+    
+    [self.database commit];
+}
+
+- (void)removeStore:(Store*)store fromProduct:(Product*)product {
+    
+    [product.stores removeObject:store];
+    
+    [self.database beginTransaction];
+    
+    [self.database executeUpdate:@"delete from productsToStores where product = ? and store = ?", product.productId, store.storeId];
+    
+    [self.database commit];
+}
+
+- (NSSet*)storesForProductId:(NSUInteger)productId {
+    
+    NSMutableSet *set = [NSMutableSet set];
+    NSString *query = [NSString stringWithFormat:@"SELECT * FROM productsToStores WHERE product = %lu", (unsigned long)productId];
+    FMResultSet *resultSet = [self.database executeQuery:query];
+    
+    while ([resultSet next]) {
+        NSNumber *storeId = resultSet.resultDictionary[@"store"];
+        NSInteger index = [self.allAvailableColors indexOfObjectPassingTest:^BOOL(Color *color, NSUInteger idx, BOOL *stop) {
+            return color.colorId.integerValue == storeId.integerValue;
+        }];
+        if (index != NSNotFound) {
+            Store *store = self.allAvailableStores[index];
+            [set addObject:store];
+        }
+    }
+    
+    return set;
+}
+
 
 - (NSNumber*)productIdLastInserted {
     
@@ -233,11 +315,24 @@
     
     NSData *data = [NSData dataWithContentsOfFile:self.jsonFileName];
     NSError *error = nil;
-    id products = data ? [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments error:&error] : nil;
-    if (error) {
+    NSArray *productsDictionaryArray = data ? [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments error:&error] : nil;
+    
+    if ([productsDictionaryArray isKindOfClass:[NSArray class]]) {
+        
+        NSMutableArray *mutableArray = [NSMutableArray arrayWithCapacity:productsDictionaryArray.count];
+        
+        for (NSDictionary *dictionary in productsDictionaryArray) {
+            
+            Product *product = [[Product alloc] initWithDictionary:dictionary];
+            [mutableArray addObject:product];
+        }
+        
+        return mutableArray;
+        
+    } else if (error) {
         NSLog(@"%@", error);
     }
-    return [products isKindOfClass:[NSMutableArray class]] ? products : nil;
+    return nil;
 }
 
 #pragma mark - Getters and setters
@@ -254,7 +349,33 @@
 
 - (NSString*)jsonFileName {
     
-    return [self.documentsDirectory stringByAppendingPathComponent:@"first.json"];
+    //return [self.documentsDirectory stringByAppendingPathComponent:@"first.json"];
+    return [[NSBundle mainBundle] pathForResource:@"first" ofType:@"json"];
+}
+
+- (NSString *)databasePath {
+    
+    return [self.documentsDirectory stringByAppendingPathComponent:@"database.sqlite"];
+}
+
+- (FMDatabase*)database {
+    
+    static FMDatabase *database = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //NSFileManager *fileManager = [NSFileManager defaultManager];
+        //[fileManager removeItemAtPath:dbPath error:nil];
+        
+        database = [FMDatabase databaseWithPath:self.databasePath];
+        
+        NSLog(@"Is SQLite compiled with it's thread safe options turned on? %@!", [FMDatabase isSQLiteThreadSafe] ? @"Yes" : @"No");
+        
+        if (![database open]) {
+            NSLog(@"Could not open db.");
+            NSLog(@"%d: %@", self.database.lastErrorCode, self.database.lastErrorMessage);
+        }
+    });
+    return database;
 }
 
 - (NSMutableArray*)allProductFromDataBase {
@@ -271,11 +392,12 @@
 
 - (NSMutableArray *)mutableArrayOfProducts {
     
+    static NSMutableArray *mutableArrayOfProducts = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _mutableArrayOfProducts = self.allProductFromDataBase;
+        mutableArrayOfProducts = self.allProductFromDataBase;
     });
-    return _mutableArrayOfProducts;
+    return mutableArrayOfProducts;
 }
      
 - (NSArray *)products {
@@ -286,7 +408,9 @@
 
 - (NSArray *)allAvailableColors {
     
-    if (!_allAvailableColors) {
+    static NSArray *allAvailableColors = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         FMResultSet *resultSet = [self.database executeQuery:@"select * from colors"];
         NSMutableArray *mutableArray = [NSMutableArray array];
         while ([resultSet next]) {
@@ -294,9 +418,26 @@
             Color *color = [[Color alloc] initWithDictionary:resultSet.resultDictionary];
             [mutableArray addObject:color];
         }
-        _allAvailableColors = mutableArray;
-    }
-    return _allAvailableColors;
+        allAvailableColors = mutableArray;
+    });
+    return allAvailableColors;
+}
+
+- (NSArray *)allAvailableStores {
+    
+    static NSArray *allAvailableStores = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        FMResultSet *resultSet = [self.database executeQuery:@"select * from stores"];
+        NSMutableArray *mutableArray = [NSMutableArray array];
+        while ([resultSet next]) {
+            
+            Store *store = [[Store alloc] initWithDictionary:resultSet.resultDictionary];
+            [mutableArray addObject:store];
+        }
+        allAvailableStores = mutableArray;
+    });
+    return allAvailableStores;
 }
 
 @end
