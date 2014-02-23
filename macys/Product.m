@@ -42,7 +42,13 @@
         self.productId = productId;
         
         self.name = [self valueForKey:NSStringFromSelector(@selector(name)) fromDictionary:dictionary];
-        self.explonation = [self valueForKey:@"description" fromDictionary:dictionary];
+        
+        id explonation = [self valueForKey:@"description" fromDictionary:dictionary];   // from database
+        if (!explonation) {
+            explonation = [self valueForKey:NSStringFromSelector(@selector(explonation)) fromDictionary:dictionary];    // from json
+        }
+        self.explonation = explonation;
+        
         self.regularPrice = [self valueForKey:NSStringFromSelector(@selector(regularPrice)) fromDictionary:dictionary];
         self.salePrice = [self valueForKey:NSStringFromSelector(@selector(salePrice)) fromDictionary:dictionary];
 

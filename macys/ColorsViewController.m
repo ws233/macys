@@ -180,8 +180,13 @@ static NSString *CellIdentifier = @"ColorsCell";
 
 - (void)insertNewObjectTapped:(id)sender
 {
+    NSMutableArray *mutableArray = [[DataStore sharedInstance].allAvailableColors mutableCopy];
+    for (Color *color in self.objects) {
+        [mutableArray removeObject:color];
+    }
+    
     ColorsViewController *colorViewController = [[ColorsViewController alloc] init];
-    colorViewController.objects = [[DataStore sharedInstance].allAvailableColors mutableCopy];
+    colorViewController.objects = mutableArray;
     colorViewController.delegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:colorViewController];
@@ -195,9 +200,12 @@ static NSString *CellIdentifier = @"ColorsCell";
 
 - (IBAction)saveButtonTapped:(id)sender
 {
-    Entity *selectedEntity = self.objects[self.tableView.indexPathForSelectedRow.row];
-    if ([self.delegate respondsToSelector:@selector(objectsViewController:didChooseObject:)]) {
-        [self.delegate objectsViewController:self didChooseObject:selectedEntity];
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        Entity *selectedEntity = self.objects[indexPath.row];
+        if ([self.delegate respondsToSelector:@selector(objectsViewController:didChooseObject:)]) {
+            [self.delegate objectsViewController:self didChooseObject:selectedEntity];
+        }
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];

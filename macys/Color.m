@@ -16,7 +16,7 @@
     if (self) {
         id colorId = [self valueForKey:@"id" fromDictionary:dictionary];    // from database
         if (!colorId) {
-            [self valueForKey:NSStringFromSelector(@selector(colorId)) fromDictionary:dictionary];  // from json
+            colorId = [self valueForKey:NSStringFromSelector(@selector(colorId)) fromDictionary:dictionary];  // from json
         }
         self.colorId = colorId;
         self.name = [self valueForKey:NSStringFromSelector(@selector(name)) fromDictionary:dictionary];

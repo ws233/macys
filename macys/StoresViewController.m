@@ -60,8 +60,13 @@ static NSString *const StoreTableViewCellReuseIdentifier = @"StoreTableViewCellR
 
 - (void)insertNewObjectTapped:(id)sender
 {
+    NSMutableArray *mutableArray = [[DataStore sharedInstance].allAvailableStores mutableCopy];
+    for (Color *color in self.objects) {
+        [mutableArray removeObject:color];
+    }
+    
     StoresViewController *storesViewController = [[StoresViewController alloc] init];
-    storesViewController.objects = [[DataStore sharedInstance].allAvailableStores mutableCopy];
+    storesViewController.objects = mutableArray;
     storesViewController.delegate = self;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:storesViewController];
