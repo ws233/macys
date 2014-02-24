@@ -10,11 +10,11 @@
 #import "Color.h"
 #import "Store.h"
 #import "Base64.h"
-#import "DataStore.h"
+#import "MCSDataStore.h"
 
 @implementation Product
 
-- (id)init {
+- (instancetype)init {
     
     NSDictionary *dictionary = @{@"productPhoto"    : [UIImagePNGRepresentation([UIImage imageNamed:@"macys_logo"]) base64EncodedString],
                                  @"name"            : @"New Product",
@@ -27,7 +27,7 @@
     return self;
 }
 
-- (id)initWithDictionary:(NSDictionary*)dictionary {
+- (instancetype)initWithDictionary:(NSDictionary*)dictionary {
     
     self = [super initWithDictionary:dictionary];
     if (self) {
@@ -58,7 +58,7 @@
             self.colors = [self objectsOfClass:[Color class] fromArray:colorsArray];
         } else {
             // read from database
-            self.colors = [[DataStore sharedInstance] colorsForProductId:self.productId.integerValue].allObjects.mutableCopy;
+            self.colors = [[MCSDataStore sharedInstance] colorsForProductId:self.productId.integerValue].allObjects.mutableCopy;
         }
         NSArray *storesArray = dictionary[NSStringFromSelector(@selector(stores))];
         if ([storesArray isKindOfClass:[NSArray class]]) {
@@ -66,7 +66,7 @@
             self.stores = [self objectsOfClass:[Store class] fromArray:storesArray];
         } else {
             // read from database
-            self.stores = [[DataStore sharedInstance] storesForProductId:self.productId.integerValue].allObjects.mutableCopy;
+            self.stores = [[MCSDataStore sharedInstance] storesForProductId:self.productId.integerValue].allObjects.mutableCopy;
         }
     }
     return self;
@@ -93,7 +93,7 @@
     
     _productPhoto = productPhoto;
     
-    [[DataStore sharedInstance] updateProduct:self];
+    [[MCSDataStore sharedInstance] updateProduct:self];
 }
 
 @end

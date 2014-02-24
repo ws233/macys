@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "MCSAppDelegate.h"
 
-@implementation AppDelegate
+@implementation MCSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

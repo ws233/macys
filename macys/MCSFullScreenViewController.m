@@ -1,20 +1,20 @@
 //
-//  FullScreenViewController.m
+//  MCSFullScreenViewController.m
 //  macys
 //
 //  Created by ws233 on 22.02.14.
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import "FullScreenViewController.h"
+#import "MCSFullScreenViewController.h"
 
-@interface FullScreenViewController ()
+@interface MCSFullScreenViewController ()
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @end
 
-@implementation FullScreenViewController
+@implementation MCSFullScreenViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {

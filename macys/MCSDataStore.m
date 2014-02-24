@@ -1,12 +1,12 @@
 //
-//  DataStore.m
+//  MCSDataStore.m
 //  macys
 //
 //  Created by Cyril iOS on 21.02.14.
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import "DataStore.h"
+#import "MCSDataStore.h"
 
 #import "FMDatabase.h"
 #import "Color.h"
@@ -16,17 +16,18 @@
 
 NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadDataFromJSONNotification";
 
-@interface DataStore ()
+@interface MCSDataStore ()
 @property (nonatomic, readonly) NSMutableArray *mutableArrayOfProducts;
 @property (nonatomic, readonly) NSString *documentsDirectory;
 @property (nonatomic, readonly) NSString *databasePath;
+@property (nonatomic, readonly) FMDatabase *database;
 @end
 
-@implementation DataStore
+@implementation MCSDataStore
 
 + (instancetype)sharedInstance {
     
-    static DataStore *sharedInstance = nil;
+    static MCSDataStore *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
@@ -34,7 +35,7 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
     return sharedInstance;
 }
 
-- (id)init {
+- (instancetype)init {
     
     self = [super init];
     if (self) {
@@ -105,9 +106,7 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)addProduct:(Product*)product {
     
     if (![self.products containsObject:product]) {
-        
         [self saveProductToDataBase:product];
-        
         [self.mutableArrayOfProducts addObject:product];
     }
 }
@@ -115,7 +114,6 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)saveProductToDataBase:(Product*)product {
     
     [self.database beginTransaction];
-    
     [self.database executeUpdate:@"insert into products (id, productPhoto, name, description, regularPrice, salePrice) values (?, ?, ?, ?, ?, ?)" ,
      product.productId,
      [UIImagePNGRepresentation(product.productPhoto) base64EncodedString],
@@ -123,7 +121,6 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
      product.explonation,
      product.regularPrice,
      product.salePrice];
-    
     [self.database commit];
     
     product.productId = self.productIdLastInserted;
@@ -132,7 +129,6 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)updateProduct:(Product*)product {
     
     [self.database beginTransaction];
-    
     [self.database executeUpdate:@"update products set productPhoto = ?, name = ?, description = ?, regularPrice = ?, salePrice = ? where id = ?" ,
      [UIImagePNGRepresentation(product.productPhoto) base64EncodedString],
      product.name,
@@ -141,7 +137,6 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
      product.salePrice,
      product.productId
      ];
-    
     [self.database commit];
     
     //[self saveToJSONFile];
@@ -150,14 +145,10 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)removeProduct:(Product*)product {
     
     [self.database beginTransaction];
-    
     [self.database executeUpdate:@"delete from products where id = ?", product.productId];
-    
     // delete dependencies
     [self.database executeUpdate:@"delete from productsToColors where product = ?", product.productId];
-
     [self.database executeUpdate:@"delete from productsToStores where product = ?", product.productId];
-    
     [self.database commit];
     
     [self.mutableArrayOfProducts removeObject:product];
@@ -166,9 +157,7 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)addColor:(Color*)color toProduct:(Product*)product
 {
     if (![product.colors containsObject:color]) {
-        
         [product.colors addObject:color];
-        
         [self saveColor:color toProduct:product];
     }
 }
@@ -176,20 +165,15 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)saveColor:(Color*)color toProduct:(Product*)product
 {
     [self.database beginTransaction];
-    
     [self.database executeUpdate:@"insert into productsToColors (product, color) values (?, ?)", product.productId, color.colorId];
-    
     [self.database commit];
 }
 
 - (void)removeColor:(Color*)color fromProduct:(Product*)product
 {
     [product.colors removeObject:color];
-
     [self.database beginTransaction];
-    
     [self.database executeUpdate:@"delete from productsToColors where product = ? and color = ?", product.productId, color.colorId];
-    
     [self.database commit];
 }
 
@@ -230,9 +214,7 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)addStore:(Store*)store toProduct:(Product*)product {
     
     if (![product.stores containsObject:store]) {
-        
         [product.stores addObject:store];
-        
         [self saveStore:store toProduct:product];
     }
 }
@@ -240,20 +222,15 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
 - (void)saveStore:(Store*)store toProduct:(Product*)product {
     
     [self.database beginTransaction];
-    
     [self.database executeUpdate:@"insert into productsToStores (product, store) values (?, ?)", product.productId, store.storeId];
-    
     [self.database commit];
 }
 
 - (void)removeStore:(Store*)store fromProduct:(Product*)product {
     
     [product.stores removeObject:store];
-    
     [self.database beginTransaction];
-    
     [self.database executeUpdate:@"delete from productsToStores where product = ? and store = ?", product.productId, store.storeId];
-    
     [self.database commit];
 }
 
@@ -301,13 +278,14 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
     if ([NSJSONSerialization isValidJSONObject:mutableArray]) {
         NSError *error = nil;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mutableArray options:NSJSONWritingPrettyPrinted error:&error];
-        if (error) {
-            NSLog(@"error");
-        } else {
+        if (!jsonData) {
+            DLog(@"error");
+        }
+        else {
             [jsonData writeToFile:self.jsonFileName atomically:YES];
         }
     } else {
-        NSLog(@"Not valid JSON object!");
+        DLog(@"Not valid JSON object!");
     }
 }
 
@@ -329,8 +307,9 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
         
         return mutableArray;
         
-    } else if (error) {
-        NSLog(@"%@", error);
+    }
+    else {
+        DLog(@"%@", error);
     }
     return nil;
 }
@@ -368,11 +347,11 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
         
         database = [FMDatabase databaseWithPath:self.databasePath];
         
-        NSLog(@"Is SQLite compiled with it's thread safe options turned on? %@!", [FMDatabase isSQLiteThreadSafe] ? @"Yes" : @"No");
+        DLog(@"Is SQLite compiled with it's thread safe options turned on? %@!", [FMDatabase isSQLiteThreadSafe] ? @"Yes" : @"No");
         
         if (![database open]) {
-            NSLog(@"Could not open db.");
-            NSLog(@"%d: %@", self.database.lastErrorCode, self.database.lastErrorMessage);
+            DLog(@"Could not open db.");
+            DLog(@"%d: %@", self.database.lastErrorCode, self.database.lastErrorMessage);
         }
     });
     return database;

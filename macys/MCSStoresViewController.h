@@ -1,5 +1,5 @@
 //
-//  StoresViewController.h
+//  MCSStoresViewController.h
 //  macys
 //
 //  Created by ws233 on 23.02.14.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ColorsViewController.h"
+#import "MCSColorsViewController.h"
 
-@interface StoresViewController : ColorsViewController
+@interface MCSStoresViewController : MCSColorsViewController
 
 @end

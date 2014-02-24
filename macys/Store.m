@@ -10,7 +10,7 @@
 
 @implementation Store
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     
     self = [super initWithDictionary:dictionary];
     if (self) {

@@ -1,22 +1,22 @@
 //
-//  DetailViewController.m
+//  MCSDetailViewController.m
 //  macys
 //
 //  Created by Cyril iOS on 21.02.14.
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "MCSDetailViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "FullScreenViewController.h"
-#import "StoresViewController.h"
+#import "MCSFullScreenViewController.h"
+#import "MCSStoresViewController.h"
 
-#import "DataStore.h"
+#import "MCSDataStore.h"
 #import "Product.h"
 #import "Color.h"
 #import "Store.h"
 
-@interface DetailViewController ()
+@interface MCSDetailViewController ()
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 @property (nonatomic, weak) IBOutlet UITextField *textFieldName;
@@ -33,7 +33,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *buttonImage;
 @end
 
-@implementation DetailViewController
+@implementation MCSDetailViewController
 
 #pragma mark - Managing the detail item
 
@@ -42,7 +42,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -115,7 +115,7 @@
         self.textViewDescription.hidden = YES;
         
         [self updateItem];
-        [[DataStore sharedInstance] updateProduct:self.detailItem];
+        [[MCSDataStore sharedInstance] updateProduct:self.detailItem];
         
         [self resignAllFirstResponders];
     }
@@ -157,27 +157,27 @@
                      } completion:nil];
 }
 
-#pragma mark - ObjectViewController delegate methods
+#pragma mark - MCSObjectViewController delegate methods
 
-- (void)objectsViewController:(ColorsViewController *)controller didAddObject:(Entity *)entity {
+- (void)objectsViewController:(MCSColorsViewController *)controller didAddObject:(Entity *)entity {
     
-    if ([controller isMemberOfClass:[ColorsViewController class]]) {
+    if ([controller isMemberOfClass:[MCSColorsViewController class]]) {
         assert([entity isMemberOfClass:[Color class]]);
-        [[DataStore sharedInstance] addColor:(Color*)entity toProduct:self.detailItem];
-    } else if ([controller isMemberOfClass:[StoresViewController class]]) {
+        [[MCSDataStore sharedInstance] addColor:(Color*)entity toProduct:self.detailItem];
+    } else if ([controller isMemberOfClass:[MCSStoresViewController class]]) {
         assert([entity isMemberOfClass:[Store class]]);
-        [[DataStore sharedInstance] addStore:(Store*)entity toProduct:self.detailItem];
+        [[MCSDataStore sharedInstance] addStore:(Store*)entity toProduct:self.detailItem];
     }
 }
 
-- (void)objectsViewController:(ColorsViewController *)controller didRemoveObject:(Entity *)entity {
+- (void)objectsViewController:(MCSColorsViewController *)controller didRemoveObject:(Entity *)entity {
     
-    if ([controller isMemberOfClass:[ColorsViewController class]]) {
+    if ([controller isMemberOfClass:[MCSColorsViewController class]]) {
         assert([entity isMemberOfClass:[Color class]]);
-        [[DataStore sharedInstance] removeColor:(Color*)entity fromProduct:self.detailItem];
-    } else if ([controller isMemberOfClass:[StoresViewController class]]) {
+        [[MCSDataStore sharedInstance] removeColor:(Color*)entity fromProduct:self.detailItem];
+    } else if ([controller isMemberOfClass:[MCSStoresViewController class]]) {
         assert([entity isMemberOfClass:[Store class]]);
-        [[DataStore sharedInstance] removeStore:(Store*)entity fromProduct:self.detailItem];
+        [[MCSDataStore sharedInstance] removeStore:(Store*)entity fromProduct:self.detailItem];
     }
 }
 
@@ -249,7 +249,7 @@
 
 - (IBAction)buttonColorsTapped:(id)sender {
     
-    ColorsViewController *colorsViewController = [[ColorsViewController alloc] init];
+    MCSColorsViewController *colorsViewController = [[MCSColorsViewController alloc] init];
     colorsViewController.objects = self.detailItem.colors;
     colorsViewController.delegate = self;
     colorsViewController.allowsEditing = YES;
@@ -258,7 +258,7 @@
 
 - (IBAction)buttonStoresTapped:(id)sender {
     
-    StoresViewController *storesViewController = [[StoresViewController alloc] init];
+    MCSStoresViewController *storesViewController = [[MCSStoresViewController alloc] init];
     storesViewController.objects = self.detailItem.stores;
     storesViewController.delegate = self;
     storesViewController.allowsEditing = YES;
@@ -275,7 +275,7 @@
         [actionSheet showInView:self.view];
         
     } else {
-        FullScreenViewController *fullScreenViewController = [[FullScreenViewController alloc] init];
+        MCSFullScreenViewController *fullScreenViewController = [[MCSFullScreenViewController alloc] init];
         fullScreenViewController.image = self.detailItem.productPhoto;
         [self.navigationController pushViewController:fullScreenViewController animated:YES];
     }

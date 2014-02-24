@@ -10,8 +10,8 @@
 
 @interface Store : Entity
 
-@property (nonatomic, strong) NSNumber *storeId;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic) NSNumber *storeId;
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *key;
 
 @end

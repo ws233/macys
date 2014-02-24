@@ -12,7 +12,7 @@
 @interface Color : Entity
 
 @property (nonatomic) NSNumber *colorId;
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic) NSString *name;
 @property (nonatomic) NSNumber *rgb;
 
 @end

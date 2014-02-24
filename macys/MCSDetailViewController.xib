@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCSDetailViewController">
             <connections>
                 <outlet property="buttonColors" destination="uif-kZ-pN9" id="o8I-UF-aqa"/>
                 <outlet property="buttonImage" destination="UXO-8c-mZx" id="cMl-ht-RCl"/>

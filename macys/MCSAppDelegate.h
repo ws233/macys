@@ -1,5 +1,5 @@
 //
-//  MasterViewController.h
+//  AppDelegate.h
 //  macys
 //
 //  Created by Cyril iOS on 21.02.14.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MasterViewController : UITableViewController
+@interface MCSAppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (nonatomic) UIWindow *window;
 
 @end

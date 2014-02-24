@@ -1,24 +1,24 @@
 //
-//  StoresViewController.m
+//  MCSStoresViewController.m
 //  macys
 //
 //  Created by ws233 on 23.02.14.
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import "StoresViewController.h"
-#import "DataStore.h"
+#import "MCSStoresViewController.h"
+#import "MCSDataStore.h"
 #import "Store.h"
 
-static NSString *const StoreTableViewCellReuseIdentifier = @"StoreTableViewCellReuseIdentifier";
+static NSString *const MCSStoreTableViewCellReuseIdentifier = @"MCSStoreTableViewCellReuseIdentifier";
 
-@interface StoresViewController ()
+@interface MCSStoresViewController ()
 
 @end
 
-@implementation StoresViewController
+@implementation MCSStoresViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
@@ -47,7 +47,7 @@ static NSString *const StoreTableViewCellReuseIdentifier = @"StoreTableViewCellR
 
 - (void)registerCell {
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"StoreTableViewCell" bundle:nil] forCellReuseIdentifier:self.reuseIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"MCSStoreTableViewCell" bundle:nil] forCellReuseIdentifier:self.reuseIdentifier];
 }
 
 - (void)configureCell:(UITableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
@@ -60,12 +60,12 @@ static NSString *const StoreTableViewCellReuseIdentifier = @"StoreTableViewCellR
 
 - (void)insertNewObjectTapped:(id)sender
 {
-    NSMutableArray *mutableArray = [[DataStore sharedInstance].allAvailableStores mutableCopy];
+    NSMutableArray *mutableArray = [[MCSDataStore sharedInstance].allAvailableStores mutableCopy];
     for (Color *color in self.objects) {
         [mutableArray removeObject:color];
     }
     
-    StoresViewController *storesViewController = [[StoresViewController alloc] init];
+    MCSStoresViewController *storesViewController = [[MCSStoresViewController alloc] init];
     storesViewController.objects = mutableArray;
     storesViewController.delegate = self;
     
@@ -75,7 +75,7 @@ static NSString *const StoreTableViewCellReuseIdentifier = @"StoreTableViewCellR
 
 - (NSString*)reuseIdentifier {
     
-    return StoreTableViewCellReuseIdentifier;
+    return MCSStoreTableViewCellReuseIdentifier;
 }
 
 @end

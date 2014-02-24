@@ -1,21 +1,21 @@
 //
-//  ColorsViewController.m
+//  MCSColorsViewController.m
 //  macys
 //
 //  Created by ws233 on 22.02.14.
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import "ColorsViewController.h"
+#import "MCSColorsViewController.h"
 
-#import "DataStore.h"
+#import "MCSDataStore.h"
 #import "Color.h"
 
 static NSString *CellIdentifier = @"ColorsCell";
 
-@implementation ColorsViewController
+@implementation MCSColorsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
@@ -130,9 +130,9 @@ static NSString *CellIdentifier = @"ColorsCell";
 
  */
 
-#pragma mark - ObjectsViewController delegate methods
+#pragma mark - MCSObjectsViewController delegate methods
 
-- (void)objectsViewController:(ColorsViewController *)controller didChooseObject:(Entity*)entity
+- (void)objectsViewController:(MCSColorsViewController *)controller didChooseObject:(Entity*)entity
 {
     if ([self.delegate respondsToSelector:@selector(objectsViewController:didAddObject:)]) {
         [self.delegate objectsViewController:self didAddObject:entity];
@@ -180,12 +180,12 @@ static NSString *CellIdentifier = @"ColorsCell";
 
 - (void)insertNewObjectTapped:(id)sender
 {
-    NSMutableArray *mutableArray = [[DataStore sharedInstance].allAvailableColors mutableCopy];
+    NSMutableArray *mutableArray = [[MCSDataStore sharedInstance].allAvailableColors mutableCopy];
     for (Color *color in self.objects) {
         [mutableArray removeObject:color];
     }
     
-    ColorsViewController *colorViewController = [[ColorsViewController alloc] init];
+    MCSColorsViewController *colorViewController = [[MCSColorsViewController alloc] init];
     colorViewController.objects = mutableArray;
     colorViewController.delegate = self;
     

@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  MCSDetailViewController.h
 //  macys
 //
 //  Created by Cyril iOS on 21.02.14.
@@ -8,18 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ColorsViewController.h"
+#import "MCSColorsViewController.h"
 
 @class Product;
 
-@interface DetailViewController : UIViewController <
+@interface MCSDetailViewController : UIViewController <
     UIScrollViewDelegate,
     UIImagePickerControllerDelegate,
     UINavigationControllerDelegate,
     UIActionSheetDelegate,
-    ObjectsViewControllerDelegate
+    MCSObjectsViewControllerDelegate
 >
 
-@property (strong, nonatomic) Product *detailItem;
+/**
+  A Product entity object being shown in MCSDetailViewController view
+ */
+@property (nonatomic) Product *detailItem;
 
 @end

@@ -1,30 +1,30 @@
 //
-//  MasterViewController.m
+//  MCSMasterViewController.m
 //  macys
 //
 //  Created by Cyril iOS on 21.02.14.
 //  Copyright (c) 2014 macys. All rights reserved.
 //
 
-#import "MasterViewController.h"
+#import "MCSMasterViewController.h"
 
-#import "DetailViewController.h"
+#import "MCSDetailViewController.h"
 
-#import "DataStore.h"
+#import "MCSDataStore.h"
 #import "Product.h"
 
-@interface MasterViewController ()
+@interface MCSMasterViewController ()
 @property (nonatomic, readonly) NSArray *products;
 @end
 
-@implementation MasterViewController
+@implementation MCSMasterViewController
 
 - (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kDataStoreDidLoadDataFromJSONNotification object:nil];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -101,7 +101,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Product *product = self.products[indexPath.row];
-        [[DataStore sharedInstance] removeProduct:product];
+        [[MCSDataStore sharedInstance] removeProduct:product];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -126,8 +126,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Product *product = [DataStore sharedInstance].products[indexPath.row];
-    DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    Product *product = [MCSDataStore sharedInstance].products[indexPath.row];
+    MCSDetailViewController *detailViewController = [[MCSDetailViewController alloc] init];
     detailViewController.detailItem = product;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
@@ -155,7 +155,7 @@
 - (void)insertNewObjectTapped:(id)sender
 {
     Product *emptyProdyct = [[Product alloc] init];
-    [[DataStore sharedInstance] addProduct:emptyProdyct];
+    [[MCSDataStore sharedInstance] addProduct:emptyProdyct];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.products.count-1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
@@ -168,7 +168,7 @@
 
 - (NSArray *)products {
     
-    return [DataStore sharedInstance].products;
+    return [MCSDataStore sharedInstance].products;
 }
 
 @end

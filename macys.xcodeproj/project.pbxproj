@@ -8,34 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		8408140118B9C30600F4DAF7 /* Store.m in Sources */ = {isa = PBXBuildFile; fileRef = 8408140018B9C30600F4DAF7 /* Store.m */; };
-		8408140418B9C43100F4DAF7 /* StoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8408140318B9C43100F4DAF7 /* StoresViewController.m */; };
-		8408140618B9CCFD00F4DAF7 /* StoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */; };
+		8408140418B9C43100F4DAF7 /* MCSStoresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8408140318B9C43100F4DAF7 /* MCSStoresViewController.m */; };
+		8408140618B9CCFD00F4DAF7 /* MCSStoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8408140518B9CCFD00F4DAF7 /* MCSStoreTableViewCell.xib */; };
 		8408140818B9D0DA00F4DAF7 /* first.json in Resources */ = {isa = PBXBuildFile; fileRef = 8408140718B9D0DA00F4DAF7 /* first.json */; };
 		8448CA9618B881E10006F3A6 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CA9518B881E10006F3A6 /* Entity.m */; };
 		8448CA9918B883CC0006F3A6 /* Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CA9818B883CC0006F3A6 /* Color.m */; };
-		8448CAA118B887A40006F3A6 /* ColorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CAA018B887A40006F3A6 /* ColorsViewController.m */; };
+		8448CAA118B887A40006F3A6 /* MCSColorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CAA018B887A40006F3A6 /* MCSColorsViewController.m */; };
 		8448CAA418B888D60006F3A6 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8448CAA318B888D60006F3A6 /* UIColor+Hex.m */; };
 		84F0F9CC18B89FC00086FD63 /* macys_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F0F9CB18B89FC00086FD63 /* macys_logo.png */; };
 		84F0F9D118B8D6790086FD63 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0F9D018B8D6790086FD63 /* Base64.m */; };
-		84F0F9D518B8FF920086FD63 /* FullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */; };
-		84F0F9D618B8FF920086FD63 /* FullScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */; };
+		84F0F9D518B8FF920086FD63 /* MCSFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F0F9D318B8FF920086FD63 /* MCSFullScreenViewController.m */; };
+		84F0F9D618B8FF920086FD63 /* MCSFullScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F0F9D418B8FF920086FD63 /* MCSFullScreenViewController.xib */; };
 		F261843518B71F3800D10042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843418B71F3800D10042 /* Foundation.framework */; };
 		F261843718B71F3800D10042 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843618B71F3800D10042 /* CoreGraphics.framework */; };
 		F261843918B71F3800D10042 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843818B71F3800D10042 /* UIKit.framework */; };
 		F261843F18B71F3800D10042 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F261843D18B71F3800D10042 /* InfoPlist.strings */; };
 		F261844118B71F3800D10042 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F261844018B71F3800D10042 /* main.m */; };
-		F261844518B71F3800D10042 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F261844418B71F3800D10042 /* AppDelegate.m */; };
+		F261844518B71F3800D10042 /* MCSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F261844418B71F3800D10042 /* MCSAppDelegate.m */; };
 		F261844818B71F3800D10042 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F261844618B71F3800D10042 /* Main.storyboard */; };
-		F261844B18B71F3800D10042 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F261844A18B71F3800D10042 /* MasterViewController.m */; };
-		F261844E18B71F3800D10042 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F261844D18B71F3800D10042 /* DetailViewController.m */; };
+		F261844B18B71F3800D10042 /* MCSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F261844A18B71F3800D10042 /* MCSMasterViewController.m */; };
+		F261844E18B71F3800D10042 /* MCSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F261844D18B71F3800D10042 /* MCSDetailViewController.m */; };
 		F261845018B71F3800D10042 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F261844F18B71F3800D10042 /* Images.xcassets */; };
 		F261845718B71F3900D10042 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261845618B71F3800D10042 /* XCTest.framework */; };
 		F261845818B71F3900D10042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843418B71F3800D10042 /* Foundation.framework */; };
 		F261845918B71F3900D10042 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F261843818B71F3800D10042 /* UIKit.framework */; };
 		F261846118B71F3900D10042 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F261845F18B71F3900D10042 /* InfoPlist.strings */; };
 		F261846318B71F3900D10042 /* macysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F261846218B71F3900D10042 /* macysTests.m */; };
-		F261846D18B71FBC00D10042 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F261846C18B71FBC00D10042 /* DetailViewController.xib */; };
-		F261847018B7204A00D10042 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F261846F18B7204A00D10042 /* DataStore.m */; };
+		F261846D18B71FBC00D10042 /* MCSDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F261846C18B71FBC00D10042 /* MCSDetailViewController.xib */; };
+		F261847018B7204A00D10042 /* MCSDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F261846F18B7204A00D10042 /* MCSDataStore.m */; };
 		F261847318B720A800D10042 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = F261847218B720A800D10042 /* Product.m */; };
 		F261848018B72B5000D10042 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = F261847618B72B5000D10042 /* FMDatabase.m */; };
 		F261848118B72B5000D10042 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F261847818B72B5000D10042 /* FMDatabaseAdditions.m */; };
@@ -58,24 +58,24 @@
 /* Begin PBXFileReference section */
 		840813FF18B9C30600F4DAF7 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
 		8408140018B9C30600F4DAF7 /* Store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Store.m; sourceTree = "<group>"; };
-		8408140218B9C43100F4DAF7 /* StoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoresViewController.h; sourceTree = "<group>"; };
-		8408140318B9C43100F4DAF7 /* StoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoresViewController.m; sourceTree = "<group>"; };
-		8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreTableViewCell.xib; sourceTree = "<group>"; };
+		8408140218B9C43100F4DAF7 /* MCSStoresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSStoresViewController.h; sourceTree = "<group>"; };
+		8408140318B9C43100F4DAF7 /* MCSStoresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSStoresViewController.m; sourceTree = "<group>"; };
+		8408140518B9CCFD00F4DAF7 /* MCSStoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSStoreTableViewCell.xib; sourceTree = "<group>"; };
 		8408140718B9D0DA00F4DAF7 /* first.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = first.json; sourceTree = "<group>"; };
 		8448CA9418B881E10006F3A6 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		8448CA9518B881E10006F3A6 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		8448CA9718B883CC0006F3A6 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		8448CA9818B883CC0006F3A6 /* Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Color.m; sourceTree = "<group>"; };
-		8448CA9F18B887A40006F3A6 /* ColorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorsViewController.h; sourceTree = "<group>"; };
-		8448CAA018B887A40006F3A6 /* ColorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorsViewController.m; sourceTree = "<group>"; };
+		8448CA9F18B887A40006F3A6 /* MCSColorsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSColorsViewController.h; sourceTree = "<group>"; };
+		8448CAA018B887A40006F3A6 /* MCSColorsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSColorsViewController.m; sourceTree = "<group>"; };
 		8448CAA218B888D60006F3A6 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "macys/UIColor+Hex.h"; sourceTree = SOURCE_ROOT; };
 		8448CAA318B888D60006F3A6 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "macys/UIColor+Hex.m"; sourceTree = SOURCE_ROOT; };
 		84F0F9CB18B89FC00086FD63 /* macys_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macys_logo.png; sourceTree = "<group>"; };
 		84F0F9CF18B8D6790086FD63 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		84F0F9D018B8D6790086FD63 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		84F0F9D218B8FF920086FD63 /* FullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreenViewController.h; sourceTree = "<group>"; };
-		84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreenViewController.m; sourceTree = "<group>"; };
-		84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullScreenViewController.xib; sourceTree = "<group>"; };
+		84F0F9D218B8FF920086FD63 /* MCSFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSFullScreenViewController.h; sourceTree = "<group>"; };
+		84F0F9D318B8FF920086FD63 /* MCSFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSFullScreenViewController.m; sourceTree = "<group>"; };
+		84F0F9D418B8FF920086FD63 /* MCSFullScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSFullScreenViewController.xib; sourceTree = "<group>"; };
 		F261843118B71F3800D10042 /* macys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F261843418B71F3800D10042 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F261843618B71F3800D10042 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,22 +84,22 @@
 		F261843E18B71F3800D10042 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F261844018B71F3800D10042 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F261844218B71F3800D10042 /* macys-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "macys-Prefix.pch"; sourceTree = "<group>"; };
-		F261844318B71F3800D10042 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F261844418B71F3800D10042 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F261844318B71F3800D10042 /* MCSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCSAppDelegate.h; sourceTree = "<group>"; };
+		F261844418B71F3800D10042 /* MCSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCSAppDelegate.m; sourceTree = "<group>"; };
 		F261844718B71F3800D10042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F261844918B71F3800D10042 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		F261844A18B71F3800D10042 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		F261844C18B71F3800D10042 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		F261844D18B71F3800D10042 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		F261844918B71F3800D10042 /* MCSMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCSMasterViewController.h; sourceTree = "<group>"; };
+		F261844A18B71F3800D10042 /* MCSMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCSMasterViewController.m; sourceTree = "<group>"; };
+		F261844C18B71F3800D10042 /* MCSDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCSDetailViewController.h; sourceTree = "<group>"; };
+		F261844D18B71F3800D10042 /* MCSDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCSDetailViewController.m; sourceTree = "<group>"; };
 		F261844F18B71F3800D10042 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F261845518B71F3800D10042 /* macysTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macysTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F261845618B71F3800D10042 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F261845E18B71F3900D10042 /* macysTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "macysTests-Info.plist"; sourceTree = "<group>"; };
 		F261846018B71F3900D10042 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F261846218B71F3900D10042 /* macysTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = macysTests.m; sourceTree = "<group>"; };
-		F261846C18B71FBC00D10042 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
-		F261846E18B7204A00D10042 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
-		F261846F18B7204A00D10042 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		F261846C18B71FBC00D10042 /* MCSDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSDetailViewController.xib; sourceTree = "<group>"; };
+		F261846E18B7204A00D10042 /* MCSDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSDataStore.h; sourceTree = "<group>"; };
+		F261846F18B7204A00D10042 /* MCSDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSDataStore.m; sourceTree = "<group>"; };
 		F261847118B720A800D10042 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
 		F261847218B720A800D10042 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		F261847518B72B5000D10042 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 		8400F26B18BA392300DFFBFC /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				F261846E18B7204A00D10042 /* DataStore.h */,
-				F261846F18B7204A00D10042 /* DataStore.m */,
+				F261846E18B7204A00D10042 /* MCSDataStore.h */,
+				F261846F18B7204A00D10042 /* MCSDataStore.m */,
 				8448CA9418B881E10006F3A6 /* Entity.h */,
 				8448CA9518B881E10006F3A6 /* Entity.m */,
 				F261847118B720A800D10042 /* Product.h */,
@@ -160,19 +160,19 @@
 		8400F26C18BA395E00DFFBFC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F261844918B71F3800D10042 /* MasterViewController.h */,
-				F261844A18B71F3800D10042 /* MasterViewController.m */,
-				F261844C18B71F3800D10042 /* DetailViewController.h */,
-				F261844D18B71F3800D10042 /* DetailViewController.m */,
-				F261846C18B71FBC00D10042 /* DetailViewController.xib */,
-				8448CA9F18B887A40006F3A6 /* ColorsViewController.h */,
-				8448CAA018B887A40006F3A6 /* ColorsViewController.m */,
-				8408140218B9C43100F4DAF7 /* StoresViewController.h */,
-				8408140318B9C43100F4DAF7 /* StoresViewController.m */,
-				8408140518B9CCFD00F4DAF7 /* StoreTableViewCell.xib */,
-				84F0F9D218B8FF920086FD63 /* FullScreenViewController.h */,
-				84F0F9D318B8FF920086FD63 /* FullScreenViewController.m */,
-				84F0F9D418B8FF920086FD63 /* FullScreenViewController.xib */,
+				F261844918B71F3800D10042 /* MCSMasterViewController.h */,
+				F261844A18B71F3800D10042 /* MCSMasterViewController.m */,
+				F261844C18B71F3800D10042 /* MCSDetailViewController.h */,
+				F261844D18B71F3800D10042 /* MCSDetailViewController.m */,
+				F261846C18B71FBC00D10042 /* MCSDetailViewController.xib */,
+				8448CA9F18B887A40006F3A6 /* MCSColorsViewController.h */,
+				8448CAA018B887A40006F3A6 /* MCSColorsViewController.m */,
+				8408140218B9C43100F4DAF7 /* MCSStoresViewController.h */,
+				8408140318B9C43100F4DAF7 /* MCSStoresViewController.m */,
+				8408140518B9CCFD00F4DAF7 /* MCSStoreTableViewCell.xib */,
+				84F0F9D218B8FF920086FD63 /* MCSFullScreenViewController.h */,
+				84F0F9D318B8FF920086FD63 /* MCSFullScreenViewController.m */,
+				84F0F9D418B8FF920086FD63 /* MCSFullScreenViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -241,8 +241,8 @@
 				F261847418B72B5000D10042 /* FMDB */,
 				84F0F9CE18B8D6790086FD63 /* Base64 */,
 				8448CAA518B894110006F3A6 /* icons */,
-				F261844318B71F3800D10042 /* AppDelegate.h */,
-				F261844418B71F3800D10042 /* AppDelegate.m */,
+				F261844318B71F3800D10042 /* MCSAppDelegate.h */,
+				F261844418B71F3800D10042 /* MCSAppDelegate.m */,
 				8400F26B18BA392300DFFBFC /* DataModel */,
 				8400F26C18BA395E00DFFBFC /* Controllers */,
 				F261844618B71F3800D10042 /* Main.storyboard */,
@@ -379,11 +379,11 @@
 				F261845018B71F3800D10042 /* Images.xcassets in Resources */,
 				84F0F9CC18B89FC00086FD63 /* macys_logo.png in Resources */,
 				8408140818B9D0DA00F4DAF7 /* first.json in Resources */,
-				8408140618B9CCFD00F4DAF7 /* StoreTableViewCell.xib in Resources */,
+				8408140618B9CCFD00F4DAF7 /* MCSStoreTableViewCell.xib in Resources */,
 				F261843F18B71F3800D10042 /* InfoPlist.strings in Resources */,
 				F261844818B71F3800D10042 /* Main.storyboard in Resources */,
-				F261846D18B71FBC00D10042 /* DetailViewController.xib in Resources */,
-				84F0F9D618B8FF920086FD63 /* FullScreenViewController.xib in Resources */,
+				F261846D18B71FBC00D10042 /* MCSDetailViewController.xib in Resources */,
+				84F0F9D618B8FF920086FD63 /* MCSFullScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,16 +402,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84F0F9D518B8FF920086FD63 /* FullScreenViewController.m in Sources */,
+				84F0F9D518B8FF920086FD63 /* MCSFullScreenViewController.m in Sources */,
 				8448CA9618B881E10006F3A6 /* Entity.m in Sources */,
 				8448CAA418B888D60006F3A6 /* UIColor+Hex.m in Sources */,
-				F261847018B7204A00D10042 /* DataStore.m in Sources */,
-				F261844518B71F3800D10042 /* AppDelegate.m in Sources */,
-				F261844B18B71F3800D10042 /* MasterViewController.m in Sources */,
+				F261847018B7204A00D10042 /* MCSDataStore.m in Sources */,
+				F261844518B71F3800D10042 /* MCSAppDelegate.m in Sources */,
+				F261844B18B71F3800D10042 /* MCSMasterViewController.m in Sources */,
 				F261848018B72B5000D10042 /* FMDatabase.m in Sources */,
-				8408140418B9C43100F4DAF7 /* StoresViewController.m in Sources */,
+				8408140418B9C43100F4DAF7 /* MCSStoresViewController.m in Sources */,
 				8448CA9918B883CC0006F3A6 /* Color.m in Sources */,
-				8448CAA118B887A40006F3A6 /* ColorsViewController.m in Sources */,
+				8448CAA118B887A40006F3A6 /* MCSColorsViewController.m in Sources */,
 				84F0F9D118B8D6790086FD63 /* Base64.m in Sources */,
 				F261848218B72B5000D10042 /* FMDatabasePool.m in Sources */,
 				F261848318B72B5000D10042 /* FMDatabaseQueue.m in Sources */,
@@ -419,7 +419,7 @@
 				F261847318B720A800D10042 /* Product.m in Sources */,
 				F261844118B71F3800D10042 /* main.m in Sources */,
 				8408140118B9C30600F4DAF7 /* Store.m in Sources */,
-				F261844E18B71F3800D10042 /* DetailViewController.m in Sources */,
+				F261844E18B71F3800D10042 /* MCSDetailViewController.m in Sources */,
 				F261848118B72B5000D10042 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,9 +549,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macys/macys-Prefix.pch";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = "macys/macys-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -563,9 +571,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "macys/macys-Prefix.pch";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				INFOPLIST_FILE = "macys/macys-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
