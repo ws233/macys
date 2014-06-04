@@ -351,7 +351,7 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
         
         if (![database open]) {
             DLog(@"Could not open db.");
-            DLog(@"%d: %@", self.database.lastErrorCode, self.database.lastErrorMessage);
+            DLog(@"%d: %@", self.database.lastErrorCode, database.lastErrorMessage);
         }
     });
     return database;
