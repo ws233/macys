@@ -242,8 +242,8 @@ NSString *const kDataStoreDidLoadDataFromJSONNotification = @"kDataStoreDidLoadD
     
     while ([resultSet next]) {
         NSNumber *storeId = resultSet.resultDictionary[@"store"];
-        NSInteger index = [self.allAvailableColors indexOfObjectPassingTest:^BOOL(Color *color, NSUInteger idx, BOOL *stop) {
-            return color.colorId.integerValue == storeId.integerValue;
+        NSInteger index = [self.allAvailableStores indexOfObjectPassingTest:^BOOL(Store *store, NSUInteger idx, BOOL *stop) {
+            return store.storeId.integerValue == storeId.integerValue;
         }];
         if (index != NSNotFound) {
             Store *store = self.allAvailableStores[index];
